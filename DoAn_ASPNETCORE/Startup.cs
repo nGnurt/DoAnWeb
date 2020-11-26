@@ -52,10 +52,12 @@ namespace DoAn_ASPNETCORE
                  name: "MyArea",
                  areaName:"Admin",
                  pattern: "Admin/{controller=SanPham}/{action=Index}/{id?}");
+
                 endpoints.MapAreaControllerRoute(
                  name: "Myuser",
                  areaName: "User",
                  pattern: "User/{controller=Pages}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                  name: "default",
                  pattern: "{controller=Home}/{action=Index}/{id?}");

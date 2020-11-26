@@ -1,11 +1,9 @@
-﻿@model IEnumerable<DoAn_ASPNETCORE.Areas.Admin.Models.UserModel>
+﻿@model DoAn_ASPNETCORE.Areas.Admin.Models.UserViewModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
 <div class="sidebar" data-image="~/admin/img/sidebar-5.jpg">
     <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
@@ -134,73 +132,79 @@
                     <p>
                         <a asp-action="Create">Create New</a>
                     </p>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.UserName)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Password)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.HoTen)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.DiaChi)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Email)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Sdt)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Loai)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TrangThai)
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+                    <form asp-controller="User" asp-action="Index" method="get">
+                        <p>
+                            Tìm kiếm: <input type="text" name="searchString">
+                            <input type="submit" value="Filter" />
+                        </p></form>
+
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.UserName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Password)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HoTen)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DiaChi)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Email)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Sdt)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Loai)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TrangThai)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                                    </td>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Users[0].UserName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Users[0].Password)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Users[0].HoTen)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Users[0].DiaChi)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Users[0].Email)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Users[0].Sdt)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Users[0].Loai)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Users[0].TrangThai)
+                                    </th>
+                                    <th></th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Users)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UserName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Password)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HoTen)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DiaChi)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Sdt)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Loai)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TrangThai)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                 </div>
             </div>
         </div>
