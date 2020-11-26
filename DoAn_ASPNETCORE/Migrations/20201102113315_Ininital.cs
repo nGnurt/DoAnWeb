@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DoAn_ASPNETCORE.Migrations
 {
-    public partial class Create : Migration
+    public partial class Ininital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
