@@ -15,5 +15,6 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         public virtual NhaCungCapModel MaNCC { set; get; }
         public string TrangThai { get; set; }
         public ICollection<SanPhamModel> lstSanPham { set; get; }
+    
     }
 }

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAn_ASPNETCORE.Areas.Admin.Data;
 using DoAn_ASPNETCORE.Areas.Admin.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
 {
@@ -21,10 +23,23 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         }
 
         // GET: Admin/SanPham
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var webbanhang = _context.SanPhamModel.Include(s => s.Loai);
-            return View(await webbanhang.ToListAsync());
+            IQueryable<string> genreQuery = from m in _context.SanPhamModel select m.TenSP;
+            var sanphams = from m in _context.SanPhamModel
+                           select m;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                sanphams = sanphams.Where(s => s.TenSP.Contains(searchString));
+            }
+        
+            var SanPhamViewModel = new SanPhamViewModel
+            {
+                SPs = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                SanPhams = await sanphams.ToListAsync()
+
+            };
+            return View(SanPhamViewModel);
         }
 
         // GET: Admin/SanPham/Details/5
@@ -58,11 +73,24 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,TenSP,MaLoai,Gia,GiaMoi,Image,Image_List,Size,SoLuong,NgayLap,TrangThai")] SanPhamModel sanPhamModel)
+        public async Task<IActionResult> Create([Bind("ID,TenSP,MaLoai,Gia,GiaMoi,Image,Image_List,Size,SoLuong,NgayLap,TrangThai")] SanPhamModel sanPhamModel, IFormFile ful)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(sanPhamModel);
+                await _context.SaveChangesAsync();
+                //dat lai ten file hinh theo ID
+                string s = sanPhamModel.ID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                //Di chuyen file hinh den folder khac
+                var path = Path.Combine(
+                    Directory.GetCurrentDirectory(), "wwwroot/admin/images/", s);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await ful.CopyToAsync(stream);
+                }
+                //Gan lai ten file hinh moi cho cot TenHinh
+                sanPhamModel.Image = s;
+                _context.Update(sanPhamModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

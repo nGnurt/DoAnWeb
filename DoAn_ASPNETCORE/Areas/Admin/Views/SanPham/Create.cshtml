@@ -127,7 +127,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4">
-                    <form asp-action="Create">
+                    <form asp-action="Create" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label asp-for="TenSP" class="control-label"></label>
@@ -148,10 +148,25 @@
                             <input asp-for="GiaMoi" class="form-control" />
                             <span asp-validation-for="GiaMoi" class="text-danger"></span>
                         </div>
+                        <div class="custom-file">
+                      
+                            <input type="file" name="ful" id="ful" class="custom-file-input" />
+                            <label class="custom-file-label" for="ful">Choose File</label>
+                        </div>
+
                         <div class="form-group">
-                            <label asp-for="Image" class="control-label"></label>
-                            <input asp-for="Image" class="form-control" />
-                            <span asp-validation-for="Image" class="text-danger"></span>
+                            @*Hien thi hinh anh*@
+                            <img id="imgPre" src="~/admin/images/noimage.jpg" alt="no img" class="img-thumbnail" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MoTaNgan" class="control-label"></label>
+                            <textarea id="editor" asp-for="MoTaNgan"></textarea>
+                            <span asp-validation-for="MoTaNgan" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MoTa" class="control-label"></label>
+                            <textarea id="editor1" asp-for="MoTa"></textarea>
+                            <span asp-validation-for="MoTa" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Image_List" class="control-label"></label>
@@ -186,8 +201,39 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+    function readURL(input, idImg) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $(idImg).attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    $('#ful').change(function () {
+        readURL(this, '#imgPre');
+    });
+    </script>
+    <script>
+
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor1'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}
     }

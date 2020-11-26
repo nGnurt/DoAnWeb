@@ -21,10 +21,29 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         }
 
         // GET: Admin/HoaDon
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-            var webbanhang = _context.HoaDonModel.Include(h => h.User);
-            return View(await webbanhang.ToListAsync());
+            IQueryable<string> genreQuery = from m in _context.HoaDonModel
+                                            select m.User.HoTen;
+
+            var HoaDon = from m in _context.HoaDonModel.Include(h => h.User)
+                                    select m;
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                HoaDon = HoaDon.Where(s => s.User.HoTen.Contains(SearchString));
+            }
+
+            
+
+            var HoaDonViewModel = new HoaDonViewModel
+            {
+                HD = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                HoaDons = await HoaDon.ToListAsync()
+            };
+
+            return View(HoaDonViewModel);
+
         }
 
         // GET: Admin/HoaDon/Details/5
