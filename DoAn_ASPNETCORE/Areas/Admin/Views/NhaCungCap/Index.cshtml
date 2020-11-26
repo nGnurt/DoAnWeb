@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DoAn_ASPNETCORE.Areas.Admin.Models.NhaCungCapModel>
+﻿@model DoAn_ASPNETCORE.Areas.Admin.Models.NhaCungCapViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -132,23 +132,30 @@
                     <p>
                         <a asp-action="Create">Create New</a>
                     </p>
+                    <form asp-controller="NhaCungCap" asp-action="Index" method="get">
+                        <p>
+
+                            Name: <input type="text" asp-for="SearchString">
+                            <input type="submit" value="Filter" />
+                        </p>
+                    </form>
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.TenNCC)
+                                    @Html.DisplayNameFor(model => model.NhaCungCaps[0].TenNCC)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.DiaChi)
+                                    @Html.DisplayNameFor(model => model.NhaCungCaps[0].DiaChi)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.TrangThai)
+                                    @Html.DisplayNameFor(model => model.NhaCungCaps[0].TrangThai)
                                 </th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.NhaCungCaps)
                             {
                                 <tr>
                                     <td>
