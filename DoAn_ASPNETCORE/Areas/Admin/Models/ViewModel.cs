@@ -13,5 +13,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         public SelectList DSLoaisp { get; set; }
         public string LoaiSanPham { get; set; }
         public string SearchString { get; set; }
+        public SelectList HD { get; internal set; }
+        public List<HoaDonModel> HoaDons { get; internal set; }
     }
 }

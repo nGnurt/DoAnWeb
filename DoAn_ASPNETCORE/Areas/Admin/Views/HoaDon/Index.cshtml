@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DoAn_ASPNETCORE.Areas.Admin.Models.HoaDonModel>
+﻿@model DoAn_ASPNETCORE.Areas.Admin.Models.HoaDonViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -131,31 +131,44 @@
                 <div class="col-md-4">
 
                     <p>
-                        <a asp-action="Create">Create New</a>
+                        <a asp-area="Admin" asp-controller="HoaDon" asp-action="Create">Create New</a>
                     </p>
+
+                    <form asp-controller="HoaDon" asp-action="Index" method="get">
+
+                        <p>
+
+                            <select asp-for="HoaDon" asp-items="Model.HD">
+                                <option value="">Tất cả</option>
+                            </select>
+
+                            Title: <input type="text" asp-for="SearchString" />
+                            <input type="submit" value="Filter" />
+                        </p>
+                    </form>
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.User)
+                                    @Html.DisplayNameFor(model => model.HoaDons[0].User)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.HoTen)
+                                    @Html.DisplayNameFor(model => model.HoaDons[0].HoTen)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Sdt)
+                                    @Html.DisplayNameFor(model => model.HoaDons[0].Sdt)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.ThanhTien)
+                                    @Html.DisplayNameFor(model => model.HoaDons[0].ThanhTien)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.TrangThai)
+                                    @Html.DisplayNameFor(model => model.HoaDons[0].TrangThai)
                                 </th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.HoaDons)
                             {
                                 <tr>
                                     <td>
