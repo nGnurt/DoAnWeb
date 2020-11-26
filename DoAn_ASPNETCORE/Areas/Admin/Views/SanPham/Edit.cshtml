@@ -158,6 +158,16 @@
                             <span asp-validation-for="Image" class="text-danger"></span>
                         </div>
                         <div class="form-group">
+                            <label asp-for="MoTaNgan" class="control-label"></label>
+                            <textarea id="editor" asp-for="MoTaNgan"></textarea>
+                            <span asp-validation-for="MoTaNgan" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MoTa" class="control-label"></label>
+                            <textarea id="editor1" asp-for="MoTa"></textarea>
+                            <span asp-validation-for="MoTa" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
                             <label asp-for="Image_List" class="control-label"></label>
                             <input asp-for="Image_List" class="form-control" />
                             <span asp-validation-for="Image_List" class="text-danger"></span>
@@ -189,10 +199,24 @@
                 </div>
             </div>
 
-           </div>
         </div>
     </div>
+</div>
 
-            @section Scripts {
-                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-            }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor1'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    
+}

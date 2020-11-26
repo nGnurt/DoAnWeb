@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DoAn_ASPNETCORE.Areas.Admin.Models.LoaiSanPhamModel>
+﻿
+@model DoAn_ASPNETCORE.Areas.Admin.Models.ViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -132,23 +133,33 @@
                     <p>
                         <a asp-action="Create">Create New</a>
                     </p>
+                    <form asp-controller="LoaiSanPham" asp-action="Index" method="get">
+                        <p>
+
+
+                            Title: <input type="text" asp-for="SearchString" />
+                            <input type="submit" value="Filter" />
+                        </p>
+                    </form>
+
+
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.TenLoai)
+                                    @Html.DisplayNameFor(model => model.LoaiSP[0].TenLoai)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.MaNCC)
+                                    @Html.DisplayNameFor(model => model.LoaiSP[0].MaNCC)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.TrangThai)
+                                    @Html.DisplayNameFor(model => model.LoaiSP[0].TrangThai)
                                 </th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.LoaiSP )
                             {
                                 <tr>
                                     <td>
