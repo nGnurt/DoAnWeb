@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAn_ASPNETCORE.Migrations
 {
     [DbContext(typeof(Webbanhang))]
-    [Migration("20201102113315_Ininital")]
-    partial class Ininital
+    [Migration("20201122133743_Create")]
+    partial class Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

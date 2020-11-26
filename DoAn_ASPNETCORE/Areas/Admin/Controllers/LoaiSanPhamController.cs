@@ -21,10 +21,34 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         }
 
         // GET: Admin/LoaiSanPham
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-            var webbanhang = _context.LoaiSanPhamModel.Include(l => l.MaNCC);
-            return View(await webbanhang.ToListAsync());
+
+            IQueryable<string> genreQuery = from m in _context.LoaiSanPhamModel
+                                          
+                                            select m.TenLoai;
+
+            var webbanhang = from m in _context.LoaiSanPhamModel
+                             select m;
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                webbanhang = webbanhang.Where(s => s.TenLoai.Contains(SearchString));
+            }
+
+            //if (!string.IsNullOrEmpty(Loaisp))
+            //{
+            //    webbanhang = webbanhang.Where(x => x.MaNCC.TenNCC ==Loaisp);
+            //}
+
+            var movieGenreVM = new ViewModel
+            {
+                DSLoaisp= new SelectList(await genreQuery.Distinct().ToListAsync()),
+                LoaiSP = await webbanhang.ToListAsync()
+            };
+
+            return View(movieGenreVM);
+
         }
 
         // GET: Admin/LoaiSanPham/Details/5
