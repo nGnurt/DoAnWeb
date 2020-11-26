@@ -19,6 +19,8 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         public string Image_List { get; set; }
         public string Size { get; set; }
         public int SoLuong { get; set; }
+        public string MoTaNgan { get; set; }
+        public string MoTa { get; set; }
         public DateTime NgayLap { get; set; }
         public string TrangThai { get; set; }
     }

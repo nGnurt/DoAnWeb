@@ -146,6 +146,12 @@ namespace DoAn_ASPNETCORE.Migrations
                     b.Property<int>("MaLoai")
                         .HasColumnType("int");
 
+                    b.Property<string>("MoTa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MoTaNgan")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("NgayLap")
                         .HasColumnType("datetime2");
 

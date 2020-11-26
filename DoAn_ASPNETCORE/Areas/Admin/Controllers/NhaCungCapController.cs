@@ -21,9 +21,24 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         }
 
         // GET: Admin/NhaCungCap
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.NhaCungCapModel.ToListAsync());
+            IQueryable<string> genreQuery = from m in _context.NhaCungCapModel select m.TenNCC;
+            var nhacungcaps = from m in _context.NhaCungCapModel
+                           select m;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                nhacungcaps = nhacungcaps.Where(s => s.TenNCC.Contains(searchString));
+            }
+
+            var NhaCungCapViewModel = new NhaCungCapViewModel
+            {
+                DSNhaCungCap = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                NhaCungCaps = await nhacungcaps.ToListAsync()
+
+            };
+            return View(NhaCungCapViewModel);
+          ;
         }
 
         // GET: Admin/NhaCungCap/Details/5
