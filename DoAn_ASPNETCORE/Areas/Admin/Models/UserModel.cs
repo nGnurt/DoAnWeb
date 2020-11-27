@@ -17,5 +17,6 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         public string Loai { get; set; }
         public string TrangThai { get; set; }
         public ICollection<HoaDonModel> lstHoaDon { set; get; }
+
     }
 }
