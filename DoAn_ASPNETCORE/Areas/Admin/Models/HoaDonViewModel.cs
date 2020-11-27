@@ -11,6 +11,6 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         public List<HoaDonModel> HoaDons { get; set; }
         public SelectList HD { get; set; }
         public string HoaDon { get; set; }
-        public string SearchString { get; set; }
+        public int SearchString { get; set; }
     }
 }

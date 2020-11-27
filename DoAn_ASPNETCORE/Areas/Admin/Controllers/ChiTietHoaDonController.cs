@@ -21,18 +21,18 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         }
 
         // GET: Admin/ChiTietHoaDon
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(int searchInt)
         {
-            IQueryable<string> genreQuery = from m in _context.ChiTietHoaDonModel
+            IQueryable<int> genreQuery = from m in _context.ChiTietHoaDonModel
 
-                                            select m.TenSP;
+                                            select m.HoaDon_ID;
 
             var ChiTietHoaDon = from m in _context.ChiTietHoaDonModel
                        select m;
 
-            if (!string.IsNullOrEmpty(searchString))
+            if (searchInt.Equals(null))
             {
-                ChiTietHoaDon = ChiTietHoaDon.Where(s => s.TenSP.Contains(searchString));
+                ChiTietHoaDon = ChiTietHoaDon.Where(s => s.HoaDon_ID.Equals(searchInt));
             }
 
 

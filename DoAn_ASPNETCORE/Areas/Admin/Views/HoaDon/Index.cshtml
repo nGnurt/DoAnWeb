@@ -138,11 +138,9 @@
 
                         <p>
 
-                            <select asp-for="HoaDon" asp-items="Model.HD">
-                                <option value="">Tất cả</option>
-                            </select>
+                         
 
-                            Title: <input type="text" asp-for="SearchString" />
+                            Tên Người Mua: <input type="text" asp-for="SearchString" />
                             <input type="submit" value="Filter" />
                         </p>
                     </form>
@@ -172,7 +170,7 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.User.ID)
+                                        @Html.DisplayFor(modelItem => item.User_ID)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.HoTen)

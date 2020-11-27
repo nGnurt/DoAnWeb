@@ -24,14 +24,14 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         public async Task<IActionResult> Index(string SearchString)
         {
             IQueryable<string> genreQuery = from m in _context.HoaDonModel
-                                            select m.User.HoTen;
+                                            select m.HoTen;
 
-            var HoaDon = from m in _context.HoaDonModel.Include(h => h.User)
+            var HoaDon = from m in _context.HoaDonModel
                                     select m;
 
             if (!string.IsNullOrEmpty(SearchString))
             {
-                HoaDon = HoaDon.Where(s => s.User.HoTen.Contains(SearchString));
+                HoaDon = HoaDon.Where(s => s.HoTen.Contains(SearchString));
             }
 
             
