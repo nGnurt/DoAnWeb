@@ -145,9 +145,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.SanPhams[0].TenSP)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.SanPhams[0].Loai)
-                                </th>
+                             
                                 <th>
                                     @Html.DisplayNameFor(model => model.SanPhams[0].Gia)
                                 </th>
@@ -182,9 +180,7 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.TenSP)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Loai.ID)
-                                    </td>
+                                   
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Gia)
                                     </td>
@@ -192,7 +188,7 @@
                                         @Html.DisplayFor(modelItem => item.GiaMoi)
                                     </td>
                                     <td>
-                                      <img src="~/admin/images/@Html.DisplayFor(modelItem => item.Image)" class="img-thumbnail"/>
+                                      <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" class="img-thumbnail"/>
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Image_List)

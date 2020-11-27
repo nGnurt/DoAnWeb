@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DoAn_ASPNETCORE.Migrations
 {
-    public partial class Ininital : Migration
+    public partial class KhoiTao : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -100,6 +100,8 @@ namespace DoAn_ASPNETCORE.Migrations
                     Image_List = table.Column<string>(nullable: true),
                     Size = table.Column<string>(nullable: true),
                     SoLuong = table.Column<int>(nullable: false),
+                    MoTaNgan = table.Column<string>(nullable: true),
+                    MoTa = table.Column<string>(nullable: true),
                     NgayLap = table.Column<DateTime>(nullable: false),
                     TrangThai = table.Column<string>(nullable: true)
                 },
