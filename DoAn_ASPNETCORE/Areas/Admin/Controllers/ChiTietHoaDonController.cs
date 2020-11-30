@@ -50,6 +50,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewData["HoaDon_ID"] = new SelectList(_context.HoaDonModel, "ID", "ID");
+            ViewData["SanPham_ID"] = new SelectList(_context.SanPhamModel, "ID", "ID");
             return View();
         }
 
