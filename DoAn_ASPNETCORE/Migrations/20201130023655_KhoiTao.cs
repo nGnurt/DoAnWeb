@@ -3,10 +3,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DoAn_ASPNETCORE.Migrations
 {
-    public partial class Ininital : Migration
+    public partial class KhoiTao : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "DanhMucModel",
+                columns: table => new
+                {
+                    ID_DanhMuc = table.Column<string>(nullable: false),
+                    TenDanhMuc = table.Column<string>(nullable: true),
+                    TrangThai = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DanhMucModel", x => x.ID_DanhMuc);
+                });
+
             migrationBuilder.CreateTable(
                 name: "NhaCungCapModel",
                 columns: table => new
@@ -100,6 +113,8 @@ namespace DoAn_ASPNETCORE.Migrations
                     Image_List = table.Column<string>(nullable: true),
                     Size = table.Column<string>(nullable: true),
                     SoLuong = table.Column<int>(nullable: false),
+                    MoTaNgan = table.Column<string>(nullable: true),
+                    MoTa = table.Column<string>(nullable: true),
                     NgayLap = table.Column<DateTime>(nullable: false),
                     TrangThai = table.Column<string>(nullable: true)
                 },
@@ -163,6 +178,9 @@ namespace DoAn_ASPNETCORE.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ChiTietHoaDonModel");
+
+            migrationBuilder.DropTable(
+                name: "DanhMucModel");
 
             migrationBuilder.DropTable(
                 name: "SanPhamModel");

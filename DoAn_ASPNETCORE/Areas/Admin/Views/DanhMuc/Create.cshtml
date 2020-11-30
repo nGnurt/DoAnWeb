@@ -1,10 +1,9 @@
-﻿@model IEnumerable<DoAn_ASPNETCORE.Areas.Admin.Models.UserModel>
+﻿@model DoAn_ASPNETCORE.Areas.Admin.Models.DanhMucModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
 
 <div class="sidebar" data-image="~/admin/img/sidebar-5.jpg">
     <!--
@@ -38,14 +37,14 @@
                 </a>
             </li>
             <li>
-                <a class="nav-link active" href="~/Admin/user/index">
+                <a class="nav-link" href="~/Admin/user/index">
                     <i class="nc-icon nc-circle-09"></i>
 
                     <p>User</p>
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="~/Admin/hoadon/index">
+                <a class="nav-link active" href="~/Admin/hoadon/index">
                     <i class="nc-icon nc-paper-2"></i>
                     <p>Hóa Đơn</p>
                 </a>
@@ -56,13 +55,6 @@
                     <p>Chi Tiết Hóa Đơn</p>
                 </a>
             </li>
-
-            <li>
-                <a class="nav-link" href="~/Admin/DanhMuc/index">
-                    <i class="nc-icon nc-notes"></i>
-                    <p>Danh Muc</p>
-                </a>
-            </li>
         </ul>
     </div>
 </div>
@@ -70,7 +62,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg " color-on-scroll="500">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#pablo">User</a>
+            <a class="navbar-brand" href="#pablo"> Hóa Đơn</a>
             <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar burger-lines"></span>
                 <span class="navbar-toggler-bar burger-lines"></span>
@@ -81,7 +73,7 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link" data-toggle="dropdown">
                             <i class="nc-icon nc-palette"></i>
-                            <span class="d-lg-none">User</span>
+                            <span class="d-lg-none">Hóa Đơn</span>
                         </a>
                     </li>
                     <li class="dropdown nav-item">
@@ -138,77 +130,43 @@
             <div class="row">
                 <div class="col-md-4">
 
-                    <p>
-                        <a asp-action="Create">Create New</a>
-                    </p>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.UserName)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Password)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.HoTen)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.DiaChi)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Email)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Sdt)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Loai)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TrangThai)
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.UserName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Password)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HoTen)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DiaChi)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Email)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Sdt)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Loai)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TrangThai)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <h4>DanhMucModel</h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="ID_DanhMuc" class="control-label"></label>
+                                    <input asp-for="ID_DanhMuc" class="form-control" />
+                                    <span asp-validation-for="ID_DanhMuc" class="text-danger"></span>
+                                </div>
+                                <div class="form-group" style="width:100px">
+                                    <label asp-for="TenDanhMuc" class="control-label"></label>
+                                    <input asp-for="TenDanhMuc" class="form-control" />
+                                    <span asp-validation-for="TenDanhMuc" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="TrangThai" class="control-label"></label>
+                                    <input asp-for="TrangThai" class="form-control" />
+                                    <span asp-validation-for="TrangThai" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-default" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a asp-action="Index">Back to List</a>
+                    </div>
+
+                    @section Scripts {
+                        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                    }
+                    </div>
+</div>
+</div>
+</div>
+</div>

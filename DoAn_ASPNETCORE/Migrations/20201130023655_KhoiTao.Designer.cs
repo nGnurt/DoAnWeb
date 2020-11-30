@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAn_ASPNETCORE.Migrations
 {
     [DbContext(typeof(Webbanhang))]
-    [Migration("20201102113315_Ininital")]
-    partial class Ininital
+    [Migration("20201130023655_KhoiTao")]
+    partial class KhoiTao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -51,6 +51,22 @@ namespace DoAn_ASPNETCORE.Migrations
                     b.HasIndex("HoaDon_ID");
 
                     b.ToTable("ChiTietHoaDonModel");
+                });
+
+            modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.DanhMucModel", b =>
+                {
+                    b.Property<string>("ID_DanhMuc")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TenDanhMuc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrangThai")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID_DanhMuc");
+
+                    b.ToTable("DanhMucModel");
                 });
 
             modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.HoaDonModel", b =>
@@ -147,6 +163,12 @@ namespace DoAn_ASPNETCORE.Migrations
 
                     b.Property<int>("MaLoai")
                         .HasColumnType("int");
+
+                    b.Property<string>("MoTa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MoTaNgan")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("NgayLap")
                         .HasColumnType("datetime2");
