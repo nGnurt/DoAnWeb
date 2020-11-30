@@ -21,10 +21,29 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         }
 
         // GET: Admin/ChiTietHoaDon
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int searchInt)
         {
-            var webbanhang = _context.ChiTietHoaDonModel.Include(c => c.HoaDon);
-            return View(await webbanhang.ToListAsync());
+            IQueryable<int> genreQuery = from m in _context.ChiTietHoaDonModel
+
+                                            select m.HoaDon_ID;
+
+            var ChiTietHoaDon = from m in _context.ChiTietHoaDonModel
+                       select m;
+
+            if (searchInt.Equals(null))
+            {
+                ChiTietHoaDon = ChiTietHoaDon.Where(s => s.HoaDon_ID.Equals(searchInt));
+            }
+
+
+            var ChiTietHoaDon1 = new ChiTietHoaDonViewModel
+            {
+                DSCTHD = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                ChiTietHoaDons = await ChiTietHoaDon.ToListAsync()
+            };
+
+            return View(ChiTietHoaDon1);
+           
         }
 
         // GET: Admin/ChiTietHoaDon/Details/5
