@@ -35,6 +35,9 @@ namespace DoAn_ASPNETCORE.Migrations
                     b.Property<int>("KhuyenMai")
                         .HasColumnType("int");
 
+                    b.Property<int>("SanPham_ID")
+                        .HasColumnType("int");
+
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");
 
@@ -47,6 +50,8 @@ namespace DoAn_ASPNETCORE.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("HoaDon_ID");
+
+                    b.HasIndex("SanPham_ID");
 
                     b.ToTable("ChiTietHoaDonModel");
                 });
@@ -231,6 +236,12 @@ namespace DoAn_ASPNETCORE.Migrations
                     b.HasOne("DoAn_ASPNETCORE.Areas.Admin.Models.HoaDonModel", "HoaDon")
                         .WithMany("lstCTHD")
                         .HasForeignKey("HoaDon_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DoAn_ASPNETCORE.Areas.Admin.Models.SanPhamModel", "SanPham")
+                        .WithMany("lstChiTietHoaDon")
+                        .HasForeignKey("SanPham_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

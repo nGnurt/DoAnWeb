@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAn_ASPNETCORE.Migrations
 {
     [DbContext(typeof(Webbanhang))]
-    [Migration("20201130024211_ntyti")]
-    partial class ntyti
+    [Migration("20201130030329_etity")]
+    partial class etity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -56,6 +56,22 @@ namespace DoAn_ASPNETCORE.Migrations
                     b.HasIndex("SanPham_ID");
 
                     b.ToTable("ChiTietHoaDonModel");
+                });
+
+            modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.DanhMucModel", b =>
+                {
+                    b.Property<string>("ID_DanhMuc")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TenDanhMuc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrangThai")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID_DanhMuc");
+
+                    b.ToTable("DanhMucModel");
                 });
 
             modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.HoaDonModel", b =>
