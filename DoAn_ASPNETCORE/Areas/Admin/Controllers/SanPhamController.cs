@@ -83,7 +83,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
                 string s = sanPhamModel.ID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
                 //Di chuyen file hinh den folder khac
                 var path = Path.Combine(
-                    Directory.GetCurrentDirectory(), "wwwroot/admin/images/", s);
+                    Directory.GetCurrentDirectory(), "wwwroot/images/", s);
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await ful.CopyToAsync(stream);

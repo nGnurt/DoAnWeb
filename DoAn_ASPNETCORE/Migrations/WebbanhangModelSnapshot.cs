@@ -15,7 +15,7 @@ namespace DoAn_ASPNETCORE.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -35,9 +35,6 @@ namespace DoAn_ASPNETCORE.Migrations
                     b.Property<int>("KhuyenMai")
                         .HasColumnType("int");
 
-                    b.Property<int>("SanPham_ID")
-                        .HasColumnType("int");
-
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");
 
@@ -51,9 +48,23 @@ namespace DoAn_ASPNETCORE.Migrations
 
                     b.HasIndex("HoaDon_ID");
 
-                    b.HasIndex("SanPham_ID");
-
                     b.ToTable("ChiTietHoaDonModel");
+                });
+
+            modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.DanhMucModel", b =>
+                {
+                    b.Property<string>("ID_DanhMuc")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TenDanhMuc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrangThai")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID_DanhMuc");
+
+                    b.ToTable("DanhMucModel");
                 });
 
             modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.HoaDonModel", b =>
@@ -220,12 +231,6 @@ namespace DoAn_ASPNETCORE.Migrations
                     b.HasOne("DoAn_ASPNETCORE.Areas.Admin.Models.HoaDonModel", "HoaDon")
                         .WithMany("lstCTHD")
                         .HasForeignKey("HoaDon_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DoAn_ASPNETCORE.Areas.Admin.Models.SanPhamModel", "SanPham")
-                        .WithMany("lstChiTietHoaDon")
-                        .HasForeignKey("SanPham_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

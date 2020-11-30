@@ -6,16 +6,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DoAn_ASPNETCORE.Areas.User.Models;
+using DoAn_ASPNETCORE.Areas.Admin.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DoAn_ASPNETCORE.Areas.User.Controllers
 {
     [Area("User")]
     public class PagesController : Controller
     {
-       
-        public IActionResult Index()
+        private readonly Webbanhang _context;
+
+        public PagesController(Webbanhang context)
         {
-            return View();
+            _context = context;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var sanphams = from m in _context.SanPhamModel select m;
+            return View(await sanphams.ToListAsync());
         }
         public IActionResult Products()
         {
