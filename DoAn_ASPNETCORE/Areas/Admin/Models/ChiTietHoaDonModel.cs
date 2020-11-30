@@ -11,12 +11,17 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         public int ID { get; set; }
         public int HoaDon_ID { get; set; }
         [ForeignKey("HoaDon_ID")]
-        public virtual HoaDonModel HoaDon { set; get; }
 
+        public virtual HoaDonModel HoaDon { set; get; }
+        public int SanPham_ID { get; set; }
+        [ForeignKey("SanPham_ID")]
+       
+        public virtual SanPhamModel SanPham { set; get; }
         public string TenSP { get; set; }
         public int SoLuong { get; set; }
         public int Gia { get; set; }
         public int KhuyenMai { get; set; }
         public int ThanhTien { get; set; }
+        
     }
 }

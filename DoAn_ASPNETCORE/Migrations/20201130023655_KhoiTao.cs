@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DoAn_ASPNETCORE.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class KhoiTao : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -107,7 +107,6 @@ namespace DoAn_ASPNETCORE.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenSP = table.Column<string>(nullable: true),
                     MaLoai = table.Column<int>(nullable: false),
-                    DanhMuc = table.Column<string>(nullable: true),
                     Gia = table.Column<int>(nullable: false),
                     GiaMoi = table.Column<int>(nullable: false),
                     Image = table.Column<string>(nullable: true),
@@ -122,12 +121,6 @@ namespace DoAn_ASPNETCORE.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SanPhamModel", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_SanPhamModel_DanhMucModel_DanhMuc",
-                        column: x => x.DanhMuc,
-                        principalTable: "DanhMucModel",
-                        principalColumn: "ID_DanhMuc",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SanPhamModel_LoaiSanPhamModel_MaLoai",
                         column: x => x.MaLoai,
@@ -176,11 +169,6 @@ namespace DoAn_ASPNETCORE.Migrations
                 column: "NhaCungCap");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SanPhamModel_DanhMuc",
-                table: "SanPhamModel",
-                column: "DanhMuc");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SanPhamModel_MaLoai",
                 table: "SanPhamModel",
                 column: "MaLoai");
@@ -192,13 +180,13 @@ namespace DoAn_ASPNETCORE.Migrations
                 name: "ChiTietHoaDonModel");
 
             migrationBuilder.DropTable(
+                name: "DanhMucModel");
+
+            migrationBuilder.DropTable(
                 name: "SanPhamModel");
 
             migrationBuilder.DropTable(
                 name: "HoaDonModel");
-
-            migrationBuilder.DropTable(
-                name: "DanhMucModel");
 
             migrationBuilder.DropTable(
                 name: "LoaiSanPhamModel");
