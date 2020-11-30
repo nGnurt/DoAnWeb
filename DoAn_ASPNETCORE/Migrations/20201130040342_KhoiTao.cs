@@ -107,6 +107,7 @@ namespace DoAn_ASPNETCORE.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenSP = table.Column<string>(nullable: true),
                     MaLoai = table.Column<int>(nullable: false),
+                    DanhMuc = table.Column<string>(nullable: true),
                     Gia = table.Column<int>(nullable: false),
                     GiaMoi = table.Column<int>(nullable: false),
                     Image = table.Column<string>(nullable: true),
@@ -122,6 +123,12 @@ namespace DoAn_ASPNETCORE.Migrations
                 {
                     table.PrimaryKey("PK_SanPhamModel", x => x.ID);
                     table.ForeignKey(
+                        name: "FK_SanPhamModel_DanhMucModel_DanhMuc",
+                        column: x => x.DanhMuc,
+                        principalTable: "DanhMucModel",
+                        principalColumn: "ID_DanhMuc",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_SanPhamModel_LoaiSanPhamModel_MaLoai",
                         column: x => x.MaLoai,
                         principalTable: "LoaiSanPhamModel",
@@ -136,6 +143,7 @@ namespace DoAn_ASPNETCORE.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HoaDon_ID = table.Column<int>(nullable: false),
+                    SanPham_ID = table.Column<int>(nullable: false),
                     TenSP = table.Column<string>(nullable: true),
                     SoLuong = table.Column<int>(nullable: false),
                     Gia = table.Column<int>(nullable: false),
@@ -151,12 +159,23 @@ namespace DoAn_ASPNETCORE.Migrations
                         principalTable: "HoaDonModel",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChiTietHoaDonModel_SanPhamModel_SanPham_ID",
+                        column: x => x.SanPham_ID,
+                        principalTable: "SanPhamModel",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChiTietHoaDonModel_HoaDon_ID",
                 table: "ChiTietHoaDonModel",
                 column: "HoaDon_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChiTietHoaDonModel_SanPham_ID",
+                table: "ChiTietHoaDonModel",
+                column: "SanPham_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HoaDonModel_User_ID",
@@ -167,6 +186,11 @@ namespace DoAn_ASPNETCORE.Migrations
                 name: "IX_LoaiSanPhamModel_NhaCungCap",
                 table: "LoaiSanPhamModel",
                 column: "NhaCungCap");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SanPhamModel_DanhMuc",
+                table: "SanPhamModel",
+                column: "DanhMuc");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SanPhamModel_MaLoai",
@@ -180,19 +204,19 @@ namespace DoAn_ASPNETCORE.Migrations
                 name: "ChiTietHoaDonModel");
 
             migrationBuilder.DropTable(
-                name: "DanhMucModel");
+                name: "HoaDonModel");
 
             migrationBuilder.DropTable(
                 name: "SanPhamModel");
 
             migrationBuilder.DropTable(
-                name: "HoaDonModel");
+                name: "UserModel");
+
+            migrationBuilder.DropTable(
+                name: "DanhMucModel");
 
             migrationBuilder.DropTable(
                 name: "LoaiSanPhamModel");
-
-            migrationBuilder.DropTable(
-                name: "UserModel");
 
             migrationBuilder.DropTable(
                 name: "NhaCungCapModel");

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAn_ASPNETCORE.Migrations
 {
     [DbContext(typeof(Webbanhang))]
-    [Migration("20201130023655_KhoiTao")]
+    [Migration("20201130040342_KhoiTao")]
     partial class KhoiTao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,9 @@ namespace DoAn_ASPNETCORE.Migrations
                     b.Property<int>("KhuyenMai")
                         .HasColumnType("int");
 
+                    b.Property<int>("SanPham_ID")
+                        .HasColumnType("int");
+
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");
 
@@ -49,6 +52,8 @@ namespace DoAn_ASPNETCORE.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("HoaDon_ID");
+
+                    b.HasIndex("SanPham_ID");
 
                     b.ToTable("ChiTietHoaDonModel");
                 });
@@ -149,6 +154,9 @@ namespace DoAn_ASPNETCORE.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("DanhMuc")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Gia")
                         .HasColumnType("int");
 
@@ -186,6 +194,8 @@ namespace DoAn_ASPNETCORE.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("DanhMuc");
 
                     b.HasIndex("MaLoai");
 
@@ -235,6 +245,12 @@ namespace DoAn_ASPNETCORE.Migrations
                         .HasForeignKey("HoaDon_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("DoAn_ASPNETCORE.Areas.Admin.Models.SanPhamModel", "SanPham")
+                        .WithMany("lstChiTietHoaDon")
+                        .HasForeignKey("SanPham_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.HoaDonModel", b =>
@@ -257,6 +273,10 @@ namespace DoAn_ASPNETCORE.Migrations
 
             modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.SanPhamModel", b =>
                 {
+                    b.HasOne("DoAn_ASPNETCORE.Areas.Admin.Models.DanhMucModel", "DMuc")
+                        .WithMany("dmucSanPham")
+                        .HasForeignKey("DanhMuc");
+
                     b.HasOne("DoAn_ASPNETCORE.Areas.Admin.Models.LoaiSanPhamModel", "Loai")
                         .WithMany("lstSanPham")
                         .HasForeignKey("MaLoai")
