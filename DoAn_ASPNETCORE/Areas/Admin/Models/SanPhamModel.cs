@@ -13,6 +13,10 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         public int MaLoai { get; set; }
         [ForeignKey("MaLoai")]
         public virtual LoaiSanPhamModel Loai { set; get; }
+
+        public string DanhMuc { get; set; }
+        [ForeignKey("DanhMuc")]
+        public virtual DanhMucModel DMuc { get; set; }
         public int Gia { get; set; }
         public int GiaMoi { get; set; }
         public string Image { get; set; }

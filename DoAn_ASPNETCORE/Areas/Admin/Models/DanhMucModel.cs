@@ -15,5 +15,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         public string TenDanhMuc { get; set; }
         public string TrangThai { get; set; }
 
+        public ICollection<SanPhamModel> dmucSanPham { get; set; }
+
     }
 }

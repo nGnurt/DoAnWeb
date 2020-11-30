@@ -147,6 +147,9 @@ namespace DoAn_ASPNETCORE.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("DanhMuc")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Gia")
                         .HasColumnType("int");
 
@@ -184,6 +187,8 @@ namespace DoAn_ASPNETCORE.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("DanhMuc");
 
                     b.HasIndex("MaLoai");
 
@@ -255,6 +260,10 @@ namespace DoAn_ASPNETCORE.Migrations
 
             modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.SanPhamModel", b =>
                 {
+                    b.HasOne("DoAn_ASPNETCORE.Areas.Admin.Models.DanhMucModel", "DMuc")
+                        .WithMany("dmucSanPham")
+                        .HasForeignKey("DanhMuc");
+
                     b.HasOne("DoAn_ASPNETCORE.Areas.Admin.Models.LoaiSanPhamModel", "Loai")
                         .WithMany("lstSanPham")
                         .HasForeignKey("MaLoai")
