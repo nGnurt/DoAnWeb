@@ -783,10 +783,10 @@ a.my-cart-b {
 }
 .accessories-w3l {
     text-align: center;
-    background: url(../images/ban1.jpg) no-repeat 0px 0px;
-	min-height: 534px;
-	background-size:cover;
-	padding: 10em 0;
+    background: url(~/images/banner.jpg) no-repeat 0px 0px;
+    min-height: 534px;
+    background-size: cover;
+    padding: 10em 0;
 }
 h3.tittle {
     font-size: 3em;
