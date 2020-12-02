@@ -5,6 +5,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 <div class="wrapper">
     <div class="sidebar" data-image="~/admin/img/sidebar-5.jpg">
         <!--
@@ -19,13 +20,13 @@
                 </a>
             </div>
             <ul class="nav">
-                <li class="nav-item">
+                <li>
                     <a class="nav-link" href="~/Admin/sanpham/index">
                         <i class="nc-icon nc-app"></i>
                         <p>Sản Phẩm</p>
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a class="nav-link" href="~/Admin/loaisanpham/index">
                         <i class="nc-icon nc-paper-2"></i>
                         <p>Loại Sản Phẩm</p>
@@ -53,6 +54,18 @@
                     <a class="nav-link" href="~/Admin/chitiethoadon/index">
                         <i class="nc-icon nc-notes"></i>
                         <p>Chi Tiết Hóa Đơn</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="~/Admin/danhmuc/index">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>Danh Mục</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="~/Admin/binhluan/index">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>Bình Luận</p>
                     </a>
                 </li>
             </ul>

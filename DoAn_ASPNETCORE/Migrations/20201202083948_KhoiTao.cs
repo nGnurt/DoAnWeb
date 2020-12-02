@@ -137,6 +137,36 @@ namespace DoAn_ASPNETCORE.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BinhLuanModel",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    User_ID = table.Column<int>(nullable: false),
+                    SanPham_ID = table.Column<int>(nullable: false),
+                    SanPhamID = table.Column<int>(nullable: true),
+                    NoiDung = table.Column<string>(nullable: true),
+                    NgayDang = table.Column<DateTime>(nullable: false),
+                    TrangThai = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BinhLuanModel", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_BinhLuanModel_SanPhamModel_SanPhamID",
+                        column: x => x.SanPhamID,
+                        principalTable: "SanPhamModel",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BinhLuanModel_UserModel_User_ID",
+                        column: x => x.User_ID,
+                        principalTable: "UserModel",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ChiTietHoaDonModel",
                 columns: table => new
                 {
@@ -166,6 +196,16 @@ namespace DoAn_ASPNETCORE.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BinhLuanModel_SanPhamID",
+                table: "BinhLuanModel",
+                column: "SanPhamID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BinhLuanModel_User_ID",
+                table: "BinhLuanModel",
+                column: "User_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChiTietHoaDonModel_HoaDon_ID",
@@ -200,6 +240,9 @@ namespace DoAn_ASPNETCORE.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BinhLuanModel");
+
             migrationBuilder.DropTable(
                 name: "ChiTietHoaDonModel");
 

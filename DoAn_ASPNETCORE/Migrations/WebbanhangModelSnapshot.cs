@@ -19,6 +19,40 @@ namespace DoAn_ASPNETCORE.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.BinhLuanModel", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("NgayDang")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NoiDung")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SanPhamID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SanPham_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrangThai")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User_ID")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("SanPhamID");
+
+                    b.HasIndex("User_ID");
+
+                    b.ToTable("BinhLuanModel");
+                });
+
             modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.ChiTietHoaDonModel", b =>
                 {
                     b.Property<int>("ID")
@@ -234,6 +268,19 @@ namespace DoAn_ASPNETCORE.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("UserModel");
+                });
+
+            modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.BinhLuanModel", b =>
+                {
+                    b.HasOne("DoAn_ASPNETCORE.Areas.Admin.Models.SanPhamModel", "SanPham")
+                        .WithMany()
+                        .HasForeignKey("SanPhamID");
+
+                    b.HasOne("DoAn_ASPNETCORE.Areas.Admin.Models.UserModel", "User")
+                        .WithMany()
+                        .HasForeignKey("User_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DoAn_ASPNETCORE.Areas.Admin.Models.ChiTietHoaDonModel", b =>

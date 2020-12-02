@@ -54,6 +54,18 @@
                         <p>Chi Tiết Hóa Đơn</p>
                     </a>
                 </li>
+                <li>
+                    <a class="nav-link" href="~/Admin/danhmuc/index">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>Danh Mục</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="~/Admin/binhluan/index">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>Bình Luận</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -145,7 +157,12 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.SanPhams[0].TenSP)
                                     </th>
-
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SanPhams[0].MaLoai)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SanPhams[0].DanhMuc)
+                                    </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.SanPhams[0].Gia)
                                     </th>
@@ -176,41 +193,46 @@
                             <tbody>
                                 @foreach (var item in Model.SanPhams)
                                 {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TenSP)
-                                        </td>
-
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Gia)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.GiaMoi)
-                                        </td>
-                                        <td>
-                                            <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" class="img-thumbnail" />
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Image_List)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Size)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.SoLuong)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.NgayLap)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TrangThai)
-                                        </td>
-                                        <td>
-                                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TenSP)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaLoai)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DanhMuc)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Gia)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.GiaMoi)
+                                    </td>
+                                    <td>
+                                        <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" class="img-thumbnail" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Image_List)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Size)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SoLuong)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NgayLap)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TrangThai)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

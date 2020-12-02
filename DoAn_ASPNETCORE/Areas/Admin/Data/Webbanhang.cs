@@ -21,5 +21,6 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Data
         public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.UserModel> UserModel { get; set; }
         public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.NhaCungCapModel> NhaCungCapModel { get; set; }
         public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.DanhMucModel> DanhMucModel { get; set; }
+        public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.BinhLuanModel> BinhLuanModel { get; set; }
     }
 }
