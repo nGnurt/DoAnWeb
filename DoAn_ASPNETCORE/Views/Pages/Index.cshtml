@@ -94,9 +94,9 @@
     <!--new-arrivals-->
     <div class="new-arrivals-w3agile">
         <div class="container">
-            <h2 class="tittle">New Arrivals</h2>
+            <h2 class="tittle">New PRODUCTS</h2>
             <div class="arrivals-grids">
-                @foreach (var item in Model)
+                @foreach (var item in ViewBag.NewProducts)
                 {
                 <div class="col-md-3 arrival-grid simpleCart_shelfItem">
                     <div class="grid-arr">
@@ -105,10 +105,10 @@
                             <figure>
                                 <a href="#" class="new-gri" data-toggle="modal" data-target="#myModal1">
                                     <div class="grid-img">
-                                        <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" class="img-responsive" alt="">
+                                        <img src="~/images/@item.Image" class="img-responsive" alt="">
                                     </div>
                                     <div class="grid-img">
-                                        <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" class="img-responsive" alt="">
+                                        <img src="~/images/@item.Image_List" class="img-responsive" alt="">
                                     </div>
                                 </a>
                             </figure>
@@ -123,9 +123,9 @@
                             <div class="starbox small ghosting"> </div>
                         </div>
                         <div class="women">
-                            <h6><a href="~/pages/single">@Html.DisplayFor(modelItem => item.TenSP)</a></h6>
-                            <span class="size">@Html.DisplayFor(modelItem => item.Size)</span>
-                            <p><del>@Html.DisplayFor(modelItem => item.Gia)</del><em class="item_price">@Html.DisplayFor(modelItem => item.GiaMoi)</em></p>
+                            <h6><a href="~/pages/single">@item.TenSP</a></h6>
+                            <span class="size">@item.Size</span>
+                            <p><del>@item.Gia</del><em class="item_price">@item.GiaMoi</em></p>
                             <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Add To Cart</a>
                         </div>
                     </div>

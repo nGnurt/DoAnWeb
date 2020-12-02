@@ -75,7 +75,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,TenSP,MaLoai,Gia,GiaMoi,Image,Image_List,Size,SoLuong,NgayLap,TrangThai")] SanPhamModel sanPhamModel, IFormFile ful)
+        public async Task<IActionResult> Create([Bind("ID,TenSP,MaLoai,DanhMuc,Gia,GiaMoi,Image,Image_List,Size,SoLuong,NgayLap,TrangThai")] SanPhamModel sanPhamModel, IFormFile ful, IFormFile ful1)
         {
             if (ModelState.IsValid)
             {
@@ -90,8 +90,18 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
                 {
                     await ful.CopyToAsync(stream);
                 }
+                //dat lai ten file hinh theo ID
+                string s1 = sanPhamModel.ID + "2nd" + "." + ful1.FileName.Split(".")[ful1.FileName.Split(".").Length - 1] ;
+                //Di chuyen file hinh den folder khac
+                var path1 = Path.Combine(
+                    Directory.GetCurrentDirectory(), "wwwroot/images/", s1);
+                using (var stream1 = new FileStream(path1, FileMode.Create))
+                {
+                    await ful1.CopyToAsync(stream1);
+                }
                 //Gan lai ten file hinh moi cho cot TenHinh
                 sanPhamModel.Image = s;
+                sanPhamModel.Image_List = s1;
                 _context.Update(sanPhamModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -114,6 +124,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
                 return NotFound();
             }
             ViewData["MaLoai"] = new SelectList(_context.Set<LoaiSanPhamModel>(), "ID", "ID", sanPhamModel.MaLoai);
+            ViewData["DanhMuc"] = new SelectList(_context.Set<DanhMucModel>(), "ID_DanhMuc", "ID_DanhMuc");
             return View(sanPhamModel);
         }
 
@@ -122,7 +133,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,TenSP,MaLoai,Gia,GiaMoi,Image,Image_List,Size,SoLuong,NgayLap,TrangThai")] SanPhamModel sanPhamModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,TenSP,MaLoai,DanhMuc,Gia,GiaMoi,Image,Image_List,Size,SoLuong,NgayLap,TrangThai")] SanPhamModel sanPhamModel, IFormFile ful, IFormFile ful1)
         {
             if (id != sanPhamModel.ID)
             {
@@ -133,6 +144,51 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (ful != null)
+                    {
+                        //Doi ten anh moi thanh ID.jpg
+
+                        string s = sanPhamModel.ID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                        string ss = sanPhamModel.Image;
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/");
+                        if (System.IO.File.Exists(path))
+                        {
+                            //Kiem tra ten anh moi co trung anh cu khong?
+                            //xoa
+                            System.IO.File.Delete(path);
+                        }
+                        //Gan ten anh moi cho path
+                        path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", s);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+
+                            await ful.CopyToAsync(stream);
+                        }
+                        //Gan lai anh moi
+                        sanPhamModel.Image = s;
+                    }
+                    if (ful1 != null)
+                    {
+                        //Doi ten anh moi thanh ID.jpg
+
+                        string s1 = sanPhamModel.ID + "2nd" + "." + ful1.FileName.Split(".")[ful1.FileName.Split(".").Length - 1];
+                        var path1 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", sanPhamModel.Image_List);
+                        if (System.IO.File.Exists(path1))
+                        {
+                            //Kiem tra ten anh moi co trung anh cu khong?
+                            //xoa
+                            System.IO.File.Delete(path1);
+                        }
+                        //Gan ten anh moi cho path
+                        path1 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", s1);
+                        using (var stream = new FileStream(path1, FileMode.Create))
+                        {
+
+                            await ful1.CopyToAsync(stream);
+                        }
+                        //Gan lai anh moi
+                        sanPhamModel.Image_List = s1;
+                    }
                     _context.Update(sanPhamModel);
                     await _context.SaveChangesAsync();
                 }

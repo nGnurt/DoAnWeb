@@ -22,8 +22,11 @@ namespace DoAn_ASPNETCORE.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var sanphams = from m in _context.SanPhamModel select m;
-            return View(await sanphams.ToListAsync());
+            var DsNewProducts = (from m in _context.SanPhamModel 
+                           where m.DanhMuc=="DM1"
+                           select m).Take(4).ToList();
+            ViewBag.NewProducts = DsNewProducts;
+            return View();
         }
         public IActionResult Products()
         {

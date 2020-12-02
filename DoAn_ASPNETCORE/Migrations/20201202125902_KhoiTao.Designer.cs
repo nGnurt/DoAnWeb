@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAn_ASPNETCORE.Migrations
 {
     [DbContext(typeof(Webbanhang))]
-    [Migration("20201202083948_KhoiTao")]
+    [Migration("20201202125902_KhoiTao")]
     partial class KhoiTao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
