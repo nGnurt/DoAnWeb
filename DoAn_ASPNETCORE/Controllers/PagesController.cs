@@ -85,7 +85,10 @@ namespace DoAn_ASPNETCORE.Controllers
         }
         public IActionResult Single(int? id)
         {
-           
+            var sanpham = (from m in _context.SanPhamModel
+                            where m.MaLoai == id
+                            select m).ToList();
+            ViewBag.SanPham = sanpham;
 
             return View();
         }
