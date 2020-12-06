@@ -3,7 +3,14 @@
 *@
 @{
 }
-<!--banner-->
+
+@model IEnumerable<DoAn_ASPNETCORE.Areas.Admin.Models.SanPhamModel>
+@{
+    ViewData["Title"] = "pages Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
 <div class="banner1">
     <div class="container">
         <h3><a href="~/pages/index">Home</a> / <span>Products</span></h3>
@@ -236,18 +243,17 @@
                                 <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
                                     <div class="product-tab">
 
-                                        @foreach (var item in ViewBag.Loai)
-                                        {
+                                       
                                             <div class="col-md-4 product-tab-grid simpleCart_shelfItem">
                                                 <div class="grid-arr">
                                                     <div class="grid-arrival">
                                                         <figure>
-                                                            <a href="~/Pages/detail/@item.ID" class="new-gri" data-toggle="modal" data-target="#myModal1">
+                                                            <a href="" class="new-gri" data-toggle="modal" data-target="#myModal1">
                                                                 <div class="grid-img">
-                                                                    <img src="~/images/@item.Image" class="img-responsive" alt="">
+                                                                    <img src="~/images/102nd.jpg" class="img-responsive" alt="">
                                                                 </div>
                                                                 <div class="grid-img">
-                                                                    <img src="~/images/@item.Image" class="img-responsive" alt="">
+                                                                    <img src="~/images/10.jpg" class="img-responsive" alt="">
                                                                 </div>
                                                             </a>
                                                         </figure>
@@ -256,15 +262,15 @@
                                                         <div class="starbox small ghosting"> </div>
                                                     </div>
                                                     <div class="women">
-                                                        <h6><a href="~/pages/single">@item.TenSP</a></h6>
+                                                        <h6><a href="~/pages/single">ssss</a></h6>
                                                         <span class="size">XL / XXL / S </span>
-                                                        <p><del>@item.Gia</del><em class="item_price">@item.GiaMoi</em></p>
-                                                        <a href="~/Pages/detail/@item.ID" data-text="Add To Cart" class="my-cart-b item_add">Add To Cart</a>
+                                                        <p><del>55a</del><em class="item_price">88i</em></p>
+                                                        <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Add To Cart</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        }
-                
+                                       
+
                                         <div class="clearfix"></div>
                                     </div>
 
