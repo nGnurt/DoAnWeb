@@ -26,53 +26,50 @@
                                     <li>
                                         <input type="checkbox" id="item-0-0" /><label for="item-0-0">Asus</label>
                                         <ul>
-                                           
-                                             <li><a href="products.html">Asus</a></li>
+
+                                            <li><a href="products.html">Asus</a></li>
 
                                         </ul>
                                     </li>
                                     <li>
                                         <input type="checkbox" id="item-0-1" /><label for="item-0-1">Apple</label>
                                         <ul>
-                                          
+
                                             <li><a href="products.html">Apple</a></li>
                                         </ul>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
-                           
-                           
-                               
                         </ul>
                     </div>
-                    <div class="price">
+                    <div class="categories">
                         <h3>Điện Thoại</h3>
-                        <ul class="dropdown-menu6">
+                        <ul class="tree-list-pad">
                             <li>
-                                <div id="slider-range"></div>
-                                <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
+                                <input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><span></span>Điện THoại</label>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="item-0-0" /><label for="item-0-0">SamSung</label>
+                                        <ul>
+
+                                            <li><a href="products.html">SamSung</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="item-0-1" /><label for="item-0-1">Apple</label>
+                                        <ul>
+
+                                            <li><a href="products.html">Apple</a></li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
                             </li>
                         </ul>
-                        <script type='text/javascript'>
-//<![CDATA[
-									$(window).load(function(){
-									 $( "#slider-range" ).slider({
-												range: true,
-												min: 0,
-												max: 9000,
-												values: [ 1000, 7000 ],
-												slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-												}
-									 });
-									$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-
-									});//]]>
-
-                        </script>
-                        <script type="text/javascript" src="~/js/jquery-ui.~/js"></script>
                     </div>
-                   
+
                     <div class="cat-img">
                         <img class="img-responsive " src="~/images/45.jpg" alt="">
                     </div>
