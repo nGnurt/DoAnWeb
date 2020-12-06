@@ -26,6 +26,11 @@ namespace DoAn_ASPNETCORE.Controllers
                            where m.DanhMuc=="DM1"
                            select m).Take(1).ToList();
 
+            var DsLastedProducts = (from m in _context.SanPhamModel
+                                    where m.DanhMuc == "DM2"
+                                    select m).Take(4).ToList();
+            ViewBag.LastedProducts = DsLastedProducts;
+          
 
             ViewBag.NewProducts = DsNewProducts;
 
