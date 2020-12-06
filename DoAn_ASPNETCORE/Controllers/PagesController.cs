@@ -22,18 +22,45 @@ namespace DoAn_ASPNETCORE.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var DsNewProducts = (from m in _context.SanPhamModel 
+            var DsNewProducts = (from m in _context.SanPhamModel
                            where m.DanhMuc=="DM1"
-                           select m).Take(4).ToList();
+                           select m).Take(1).ToList();
+
+
             ViewBag.NewProducts = DsNewProducts;
+
+            var Loai = (from l in _context.LoaiSanPhamModel
+                                
+                                 select l).ToList();
+
+            ViewBag.TenL = Loai;
             return View();
         }
-        public IActionResult Products()
+
+        public async Task<IActionResult> Header()
         {
+            var danhmuc = (from m in _context.LoaiSanPhamModel where m.TenLoai == "iPhone" select m).ToList();
+            ViewBag.danhmuc = danhmuc;
+            return View();
+        }
+        public IActionResult products()
+        {
+            var DsNewProducts = (from m in _context.SanPhamModel
+                                 where m.MaLoai ==2
+                                 select m).ToList();
+          
+            ViewBag.Loai = DsNewProducts;
+            return View();
+        }
+
+        public ViewResult detail(int id)
+        {
+         
             return View();
         }
         public IActionResult Checkout()
         {
+           
             return View();
         }
         public IActionResult Products1()
@@ -56,6 +83,7 @@ namespace DoAn_ASPNETCORE.Controllers
         {
             return View();
         }
+
 
 
 
