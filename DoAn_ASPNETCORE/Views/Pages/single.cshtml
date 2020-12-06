@@ -4,31 +4,27 @@
     <div class="single-wl3">
         <div class="container">
             <div class="single-grids">
+                @foreach(var sanpham in ViewBag.SanPham)
+                { 
                 <div class="col-md-9 single-grid">
                     <div clas="single-top">
                         <div class="single-left">
                             <div class="flexslider">
                                 <ul class="slides">
                                     <li data-thumb="images/si.jpg">
-                                        <div class="thumb-image"> <img src="~/user/images/si.jpg" data-imagezoom="true" class="img-responsive"> </div>
-                                    </li>
-                                    <li data-thumb="images/si1.jpg">
-                                        <div class="thumb-image"> <img src="~/user/images/si1.jpg" data-imagezoom="true" class="img-responsive"> </div>
-                                    </li>
-                                    <li data-thumb="images/si2.jpg">
-                                        <div class="thumb-image"> <img src="~/user/images/si2.jpg" data-imagezoom="true" class="img-responsive"> </div>
+                                        <div class="thumb-image"> <img src="~/images/@sanpham.Image" data-imagezoom="true" class="img-responsive"> </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="single-right simpleCart_shelfItem">
-                            <h4>Sed do eiusmod tempor</h4>
+                            <h4>@sanpham.TenSP</h4>
                             <div class="block">
                                 <div class="starbox small ghosting"> </div>
                             </div>
-                            <p class="price item_price">$ 14.00</p>
+                            <p class="price item_price">@sanpham.GiaMoi VND</p>
                             <div class="description">
-                                <p><span>Quick Overview : </span> In cursus faucibus tortor eu vestibulum. Ut eget turpis ac justo porta varius. Donec vel felis ante, ac vehicula ipsum. Quisque sed diam metus. Quisque eget leo sit amet erat varius rutrum vitae dapibus lectus. Vivamus et sapien ante. Suspendisse potenti. Fusce in tellus est, ac consequat.</p>
+                                <p><span>Quick Overview : </span> @sanpham.MoTaNgan</p>
                             </div>
                             <div class="color-quality">
                                 <h6>Quality :</h6>
@@ -54,7 +50,7 @@
                                 <!--quantity-->
                             </div>
                             <div class="women">
-                                <span class="size">XL / XXL / S </span>
+                                <span class="size">@sanpham.Size </span>
                                 <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Add To Cart</a>
                             </div>
                             <div class="social-icon">
@@ -67,6 +63,7 @@
                         <div class="clearfix"> </div>
                     </div>
                 </div>
+                }
                 <div class="col-md-3 single-grid1">
                     <h3>Recent Products</h3>
                     <div class="recent-grids">
