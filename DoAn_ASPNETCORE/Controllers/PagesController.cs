@@ -28,8 +28,12 @@ namespace DoAn_ASPNETCORE.Controllers
             ViewBag.NewProducts = DsNewProducts;
             return View();
         }
-        public IActionResult Products()
+        public IActionResult Products(int? id)
         {
+            var DsLapTop = from m in _context.SanPhamModel
+                                 where m.MaLoai == id
+                                 select m;
+            ViewBag.LapTop = DsLapTop;
             return View();
         }
         public IActionResult Checkout()
