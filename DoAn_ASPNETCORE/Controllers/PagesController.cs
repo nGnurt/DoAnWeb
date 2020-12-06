@@ -63,8 +63,12 @@ namespace DoAn_ASPNETCORE.Controllers
            
             return View();
         }
-        public IActionResult Products1()
+        public IActionResult Products1(int? id)
         {
+            var DsLaptop = (from m in _context.SanPhamModel
+                            where m.MaLoai == id
+                            select m).ToList();
+            ViewBag.LapTop = DsLaptop;
             return View();
         }
         public IActionResult Login()
@@ -79,8 +83,10 @@ namespace DoAn_ASPNETCORE.Controllers
         {
             return View();
         }
-        public IActionResult Single()
+        public IActionResult Single(int? id)
         {
+           
+
             return View();
         }
 
