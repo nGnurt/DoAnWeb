@@ -50,13 +50,7 @@ namespace DoAn_ASPNETCORE.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Header()
-        {
-            var danhmuc = (from m in _context.LoaiSanPhamModel where m.TenLoai == "iPhone" select m).ToList();
-            ViewBag.danhmuc = danhmuc;
-            return View();
-        }
-        public IActionResult products(int? id)
+        public async Task<IActionResult> products(int? id)
         {
             var iphone = (from m in _context.SanPhamModel
                                  where m.MaLoai ==id
@@ -66,9 +60,14 @@ namespace DoAn_ASPNETCORE.Controllers
             return View();
         }
 
-        public ViewResult detail(int id)
+        public async Task<IActionResult> detail(int? id)
         {
-         
+      
+            var detail = (from m in _context.SanPhamModel
+                          where m.ID == id
+                          select m).ToList();
+
+            ViewBag.ChiTiet = detail;
             return View();
         }
         public IActionResult Checkout()
