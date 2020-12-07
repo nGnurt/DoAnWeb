@@ -101,7 +101,15 @@ namespace DoAn_ASPNETCORE.Controllers
                             where m.ID == id
                             select m).ToList();
             ViewBag.SanPham = sanpham;
-
+            var Recent = (from m in _context.SanPhamModel
+                                  where m.MaLoai == 2
+                                  select m).Take(4).ToList();
+            ViewBag.Recent = Recent;
+            var BetsSell = (from l in _context.SanPhamModel
+                            where l.DanhMuc == "DM3"
+                            select l).Take(4).ToList();
+            ViewBag.BestSellers = BetsSell;
+           
             return View();
         }
 
