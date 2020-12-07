@@ -24,7 +24,7 @@ namespace DoAn_ASPNETCORE.Controllers
         {
             var DsNewProducts = (from m in _context.SanPhamModel
                            where m.DanhMuc=="DM1"
-                           select m).Take(1).ToList();
+                           select m).Take(4).ToList();
 
             var DsLastedProducts = (from m in _context.SanPhamModel
                                     where m.DanhMuc == "DM2"
