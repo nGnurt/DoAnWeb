@@ -37,8 +37,16 @@ namespace DoAn_ASPNETCORE.Controllers
             var Loai = (from l in _context.LoaiSanPhamModel
                                 
                                  select l).ToList();
-
             ViewBag.TenL = Loai;
+
+
+            var BetsSell = (from l in _context.SanPhamModel
+                            where l.DanhMuc == "DM3"
+                            select l).Take(4).ToList();
+            ViewBag.BestSellers = BetsSell;
+
+
+
             return View();
         }
 
@@ -48,13 +56,13 @@ namespace DoAn_ASPNETCORE.Controllers
             ViewBag.danhmuc = danhmuc;
             return View();
         }
-        public IActionResult products()
+        public IActionResult products(int? id)
         {
-            var DsNewProducts = (from m in _context.SanPhamModel
-                                 where m.MaLoai ==2
+            var iphone = (from m in _context.SanPhamModel
+                                 where m.MaLoai ==id
                                  select m).ToList();
           
-            ViewBag.Loai = DsNewProducts;
+            ViewBag.Loai = iphone;
             return View();
         }
 
