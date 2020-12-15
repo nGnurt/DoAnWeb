@@ -27,6 +27,7 @@ namespace DoAn_ASPNETCORE
             services.AddControllersWithViews();
             services.AddDbContext<Webbanhang>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("Webbanhang")));
+            services.AddAntiforgery(o => o.HeaderName = "CSRF-TOKEN");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

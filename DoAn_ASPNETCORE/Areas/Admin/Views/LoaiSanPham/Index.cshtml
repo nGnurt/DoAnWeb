@@ -6,7 +6,7 @@
 }
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -16,7 +16,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form asp-area="Admin" asp-controller="LoaiSanPham" asp-action="Create">
+                            <form>
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="form-group">
                                     <label asp-for="TenLoai" class="control-label"></label>
@@ -42,6 +42,43 @@
                     </div>
                 </div>
             </div>
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm loại sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" id="edit_id" asp-for="ID" />
+                    <div class="form-group">
+                        <label asp-for="TenLoai" class="control-label"></label>
+                        <input asp-for="TenLoai" id="edit_tenloai" class="form-control" />
+                        <span asp-validation-for="TenLoai" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NhaCungCap" class="control-label"></label>
+                        <select asp-for="NhaCungCap" id="edit_ncc" class="form-control" asp-items="ViewBag.NhaCungCap"></select>
+                        <span asp-validation-for="NhaCungCap" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TrangThai" class="control-label"></label>
+                        <input asp-for="TrangThai" id="edit_trangthai" class="form-control" />
+                        <span asp-validation-for="TrangThai" class="text-danger"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" name="btn_update_loaisanpham" class="btn btn-primary">Cập Nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="wrapper">
     <div class="sidebar" data-image ="../../admin/img/sidebar-5.jpg">
         <!--
@@ -183,7 +220,7 @@
                     <div class="col-md-4">
 
                         <p>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Thêm</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Thêm</button>
                         </p>
 
 
@@ -216,8 +253,8 @@
                                             @item.TrangThai
                                         </td>
                                         <td>
-                                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                                            <button type="button" name="edit_loaisanpham" data-idloaisp="@item.ID" class="btn btn-primary" data-toggle="modal" data-target="#EditModal">Edit</button>
+                                            <button type="button" name="btn_delete_loaisanpham" data-idloaisp="@item.ID" class="btn btn-danger">Delete</button>
                                             <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                                         </td>
                                     </tr>
@@ -232,32 +269,95 @@
         @section Scripts{
             @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
             <script>
-                let url = "../../api/LoaiSanPhamApi/PostLoaiSanPhamModel";
-
-                $('button[name=btn_create_loaisanpham]').click(function () {
-                    let name = document.querySelector("#tenloai").value;
+                function addLoaiSP() {           
+                        var insert = {};
+                        insert.TenLoai = $("#tenloai").val();
+                        insert.NhaCungCap = parseInt($("#ncc").val());
+                        insert.TrangThai = $("#trangthai").val();
+                    $.ajax({
+                        url: "../../api/LoaiSanPhamApi/PostLoaiSanPhamModel",
+                        type: "POST",
+                        contentType: "Application/json;charset-utf-8",
+                        data: JSON.stringify(insert),
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        alert('Thêm vào loại sản phẩm thành công!');
+                        location.reload();
+                    }).fail(function (){
+                        alert('Thất bại !');
+                    });
+                }
+                function getLoaiSP(id) {
+                    $.ajax({
+                        url: "../../api/LoaiSanPhamApi/GetLoaiSanPhamModel/"+id,
+                        type: "GET",
+                        contentType: "Application/json;charset-utf-8",
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        $("#edit_id").val(reponse.id);
+                        $("#edit_tenloai").val(reponse.tenLoai);
+                        $("#edit_ncc").val(reponse.nhaCungCap);
+                        $("#edit_trangthai").val(reponse.trangThai);
+                        
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                function updateLoaiSP(id) {
+                    var update = {}
+                    update.ID = parseInt(id);
+                    update.TenLoai = $("#edit_tenloai").val();
+                    update.NhaCungCap = parseInt($("#edit_ncc").val());
+                    update.TrangThai = $("#edit_trangthai").val();
+                    $.ajax({
+                        url: "../../api/LoaiSanPhamApi/PutLoaiSanPhamModel/"+id,
+                        type: "PUT",
+                        contentType: "Application/json;charset-utf-8",
+                        data: JSON.stringify(update),
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        alert('Update sản phẩm thành công!');
+                        location.reload();
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                function deleteLoaiSP(id) {
                     
-                    fetch(url, {
-                        method: 'post',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({TenLoai: name, NhaCungCap: 1, TrangThai: 1 })
-                    })
-                        .then(function (response) {
-                            if (!response.ok) {
-                                throw Error(response.statusText);
-                            }
-                            return response.json();
-                        })
-                        .then(function (responseAsJson) {
-                            console.log(responseAsJson);
-                            location.reload();
-                        })
-                        .catch(function (error) {
-                            console.log('Looks like there was a problem: \n', error);
-                        });
-                })
+                    $.ajax({
+                        url: "../../api/LoaiSanPhamApi/DeleteLoaiSanPhamModel/" + id,
+                        type: "DELETE",
+                        contentType: "Application/json;charset-utf-8",
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        alert('Xóa sản phẩm thành công!');
+                        location.reload();
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                $(document).ready(function ()
+                {
+                    $('button[name=btn_create_loaisanpham]').click(function (e) {
+                        addLoaiSP();
+                        e.preventDefault();
+                    });
+                    $('button[name=edit_loaisanpham]').click(function (e) {
+                        var id = $(this).data("idloaisp");
+                        getLoaiSP(id);
+                        e.preventDefault();
+                    });
+                    $('button[name=btn_update_loaisanpham]').click(function (e) {
+                        var id = $("#edit_id").val();
+                        updateLoaiSP(id);
+                        e.preventDefault();
+                    });
+                    $('button[name=btn_delete_loaisanpham]').click(function (e) {
+                        var id = $(this).data("idloaisp");
+                        deleteLoaiSP(id);
+                        e.preventDefault();
+                    });
+                });
+            
             </script>
         }
-
