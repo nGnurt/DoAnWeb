@@ -21,33 +21,35 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         }
 
         // GET: Admin/LoaiSanPham
-        public async Task<IActionResult> Index(string SearchString)
+        public async Task<IActionResult> Index(/*string SearchString*/)
         {
 
-            IQueryable<string> genreQuery = from m in _context.LoaiSanPhamModel
-                                          
-                                            select m.TenLoai;
+            //IQueryable<string> genreQuery = from m in _context.LoaiSanPhamModel
 
-            var webbanhang = from m in _context.LoaiSanPhamModel
-                             select m;
+            //                                select m.TenLoai;
+            //var webbanhang = from m in _context.LoaiSanPhamModel
+            //                 select m;
 
-            if (!string.IsNullOrEmpty(SearchString))
-            {
-                webbanhang = webbanhang.Where(s => s.TenLoai.Contains(SearchString));
-            }
-
-            //if (!string.IsNullOrEmpty(Loaisp))
+            //if (!string.IsNullOrEmpty(SearchString))
             //{
-            //    webbanhang = webbanhang.Where(x => x.MaNCC.TenNCC ==Loaisp);
+            //    webbanhang = webbanhang.Where(s => s.TenLoai.Contains(SearchString));
             //}
 
-            var movieGenreVM = new ViewModel
-            {
-                DSLoaisp= new SelectList(await genreQuery.Distinct().ToListAsync()),
-                LoaiSP = await webbanhang.ToListAsync()
-            };
+            ////if (!string.IsNullOrEmpty(Loaisp))
+            ////{
+            ////    webbanhang = webbanhang.Where(x => x.MaNCC.TenNCC ==Loaisp);
+            ////}
 
-            return View(movieGenreVM);
+            //var movieGenreVM = new ViewModel
+            //{
+            //    DSLoaisp= new SelectList(await genreQuery.Distinct().ToListAsync()),
+            //    LoaiSP = await webbanhang.ToListAsync()
+            //};
+            var DsLoaiSanPham = from m in _context.LoaiSanPhamModel
+                                 select m;
+            ViewBag.DsLoaiSP = DsLoaiSanPham;
+            ViewData["NhaCungCap"] = new SelectList(_context.Set<NhaCungCapModel>(), "ID", "ID");
+            return View();
 
         }
 

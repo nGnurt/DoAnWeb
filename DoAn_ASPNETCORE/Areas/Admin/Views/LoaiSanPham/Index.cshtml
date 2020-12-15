@@ -1,13 +1,49 @@
 ﻿
-@model DoAn_ASPNETCORE.Areas.Admin.Models.ViewModel
-
+@model DoAn_ASPNETCORE.Areas.Admin.Models.LoaiSanPhamModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm loại sản phẩm</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form asp-area="Admin" asp-controller="LoaiSanPham" asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="TenLoai" class="control-label"></label>
+                                    <input id="tenloai" asp-for="TenLoai" class="form-control" />
+                                    <span asp-validation-for="TenLoai" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="NhaCungCap" class="control-label"></label>
+                                    <select asp-for="NhaCungCap" id="ncc" class="form-control" asp-items="ViewBag.NhaCungCap"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="TrangThai" class="control-label"></label>
+                                    <input asp-for="TrangThai" id="trangthai" class="form-control" />
+                                    <span asp-validation-for="TrangThai" class="text-danger"></span>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            <button type="button" name="btn_create_loaisanpham" class="btn btn-primary">Thêm Mới</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 <div class="wrapper">
-    <div class="sidebar" data-image="~/admin/img/sidebar-5.jpg">
+    <div class="sidebar" data-image ="../../admin/img/sidebar-5.jpg">
         <!--
             Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -71,6 +107,7 @@
             </ul>
         </div>
     </div>
+
     <div class="main-panel">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg " color-on-scroll="500">
@@ -137,6 +174,7 @@
                     </ul>
                 </div>
             </div>
+            
         </nav>
 
         <div class="content">
@@ -145,42 +183,37 @@
                     <div class="col-md-4">
 
                         <p>
-                            <a asp-action="Create">Create New</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Thêm</button>
                         </p>
-                        <form asp-controller="LoaiSanPham" asp-action="Index" method="get">
-                            <p>
-                                Title: <input type="text" asp-for="SearchString" />
-                                <input type="submit" value="Filter" />
-                            </p>
-                        </form>
+
 
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.LoaiSP[0].TenLoai)
+                                        @Html.DisplayNameFor(model => model.TenLoai)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.LoaiSP[0].MaNCC)
+                                        @Html.DisplayNameFor(model => model.MaNCC)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.LoaiSP[0].TrangThai)
+                                        @Html.DisplayNameFor(model => model.TrangThai)
                                     </th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.LoaiSP)
+                                @foreach (var item in ViewBag.DsLoaiSP)
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.TenLoai)
+                                            @item.TenLoai
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.MaNCC.ID)
+                                            @item.NhaCungCap
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.TrangThai)
+                                            @item.TrangThai
                                         </td>
                                         <td>
                                             <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
@@ -195,3 +228,36 @@
                 </div>
             </div>
         </div>
+
+        @section Scripts{
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            <script>
+                let url = "../../api/LoaiSanPhamApi/PostLoaiSanPhamModel";
+
+                $('button[name=btn_create_loaisanpham]').click(function () {
+                    let name = document.querySelector("#tenloai").value;
+                    
+                    fetch(url, {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({TenLoai: name, NhaCungCap: 1, TrangThai: 1 })
+                    })
+                        .then(function (response) {
+                            if (!response.ok) {
+                                throw Error(response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(function (responseAsJson) {
+                            console.log(responseAsJson);
+                            location.reload();
+                        })
+                        .catch(function (error) {
+                            console.log('Looks like there was a problem: \n', error);
+                        });
+                })
+            </script>
+        }
+
