@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,6 +28,13 @@ namespace DoAn_ASPNETCORE
             services.AddDbContext<Webbanhang>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("Webbanhang")));
             services.AddAntiforgery(o => o.HeaderName = "CSRF-TOKEN");
+            services.AddDistributedMemoryCache();           // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(30000);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,15 +53,14 @@ namespace DoAn_ASPNETCORE
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthorization();
+            app.UseSession();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapAreaControllerRoute(
                  name: "MyArea",
-                 areaName:"Admin",
+                 areaName: "Admin",
                  pattern: "Admin/{controller=SanPham}/{action=Index}/{id?}");
-
-               
                 endpoints.MapControllerRoute(
                  name: "default",
                  pattern: "{controller=Pages}/{action=Index}/{id?}");

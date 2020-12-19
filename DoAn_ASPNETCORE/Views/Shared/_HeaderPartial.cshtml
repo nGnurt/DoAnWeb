@@ -10,7 +10,17 @@
             <div class="top-right">
                 <ul>
                     <li><a href="~/pages/checkout">Checkout</a></li>
-                    <li><a href="~/pages/login">Login</a></li>
+                    @if (string.IsNullOrEmpty(ViewBag.Username))
+                    {
+                        <li><a href="~/pages/login">Login</a></li>
+
+                    }
+                    else
+                    {
+                        <li><a href="#">@ViewBag.Username</a></li>
+                        <li><a onclick="DeleteSession()" href="javascript:">Log out</a></li>
+                    }
+
                     <li><a href="~/pages/registered"> Create Account </a></li>
                 </ul>
             </div>

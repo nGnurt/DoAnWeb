@@ -9,6 +9,7 @@
     @await Html.PartialAsync("_HeaderPartial.cshtml")
     @RenderBody()
     @await Html.PartialAsync("_FooterPartial.cshtml")
+    <partial name="_PartialJS" />
     @RenderSection("Scripts", required: false)
 </body>
 </html>
