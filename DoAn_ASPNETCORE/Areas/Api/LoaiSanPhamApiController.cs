@@ -33,12 +33,10 @@ namespace DoAn_ASPNETCORE.Areas.Api
         public async Task<ActionResult<LoaiSanPhamModel>> GetLoaiSanPhamModel(int id)
         {
             var loaiSanPhamModel = await _context.LoaiSanPhamModel.FindAsync(id);
-
             if (loaiSanPhamModel == null)
             {
                 return NotFound();
             }
-
             return loaiSanPhamModel;
         }
 
