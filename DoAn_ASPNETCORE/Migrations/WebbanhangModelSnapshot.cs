@@ -146,9 +146,12 @@ namespace DoAn_ASPNETCORE.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TenLoai")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("TrangThai")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DoAn_ASPNETCORE.Areas.Admin.Data;
 using DoAn_ASPNETCORE.Areas.Admin.Models;
+using System.IO;
 
 namespace DoAn_ASPNETCORE.Areas.Api
 {
@@ -78,11 +79,33 @@ namespace DoAn_ASPNETCORE.Areas.Api
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<SanPhamModel>> PostSanPhamModel(SanPhamModel sanPhamModel)
+        public async Task<ActionResult<SanPhamModel>> PostSanPhamModel(SanPhamModel sanPhamModel, IFormFile ful, IFormFile ful1)
         {
             _context.SanPhamModel.Add(sanPhamModel);
             await _context.SaveChangesAsync();
-
+            //dat lai ten file hinh theo ID
+            string s = sanPhamModel.ID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+            //Di chuyen file hinh den folder khac
+            var path = Path.Combine(
+                Directory.GetCurrentDirectory(), "wwwroot/images/", s);
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await ful.CopyToAsync(stream);
+            }
+            //dat lai ten file hinh theo ID
+            string s1 = sanPhamModel.ID + "2nd" + "." + ful1.FileName.Split(".")[ful1.FileName.Split(".").Length - 1];
+            //Di chuyen file hinh den folder khac
+            var path1 = Path.Combine(
+                Directory.GetCurrentDirectory(), "wwwroot/images/", s1);
+            using (var stream1 = new FileStream(path1, FileMode.Create))
+            {
+                await ful1.CopyToAsync(stream1);
+            }
+            //Gan lai ten file hinh moi cho cot TenHinh
+            sanPhamModel.Image = s;
+            sanPhamModel.Image_List = s1;
+            _context.Update(sanPhamModel);
+            await _context.SaveChangesAsync();
             return CreatedAtAction("GetSanPhamModel", new { id = sanPhamModel.ID }, sanPhamModel);
         }
 

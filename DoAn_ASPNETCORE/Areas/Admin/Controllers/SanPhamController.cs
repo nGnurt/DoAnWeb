@@ -32,7 +32,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
             {
                 sanphams = sanphams.Where(s => s.TenSP.Contains(searchString));
             }
-        
+
             var SanPhamViewModel = new SanPhamViewModel
             {
                 SPs = new SelectList(await genreQuery.Distinct().ToListAsync()),
@@ -106,7 +106,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaLoai"] = new SelectList(_context.Set<LoaiSanPhamModel>(), "ID", "ID", sanPhamModel.MaLoai);
+            
             return View(sanPhamModel);
         }
 

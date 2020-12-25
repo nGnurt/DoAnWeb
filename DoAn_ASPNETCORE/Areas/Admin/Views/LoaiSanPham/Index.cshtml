@@ -7,41 +7,42 @@
 
 
 <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Thêm loại sản phẩm</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="form-group">
-                                    <label asp-for="TenLoai" class="control-label"></label>
-                                    <input id="tenloai" asp-for="TenLoai" class="form-control" />
-                                    <span asp-validation-for="TenLoai" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="NhaCungCap" class="control-label"></label>
-                                    <select asp-for="NhaCungCap" id="ncc" class="form-control" asp-items="ViewBag.NhaCungCap"></select>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="TrangThai" class="control-label"></label>
-                                    <input asp-for="TrangThai" id="trangthai" class="form-control" />
-                                    <span asp-validation-for="TrangThai" class="text-danger"></span>
-                                </div>
-
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            <button type="button" name="btn_create_loaisanpham" class="btn btn-primary">Thêm Mới</button>
-                        </div>
-                    </div>
-                </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm loại sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <div class="modal-body">
+                <form>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="TenLoai" class="control-label"></label>
+                        <input id="tenloai" asp-for="TenLoai" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.TenLoai)</span>
+                    
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NhaCungCap" class="control-label"></label>
+                        <select asp-for="NhaCungCap" id="ncc" class="form-control" asp-items="ViewBag.NhaCungCap"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TrangThai" class="control-label"></label>
+                        <input asp-for="TrangThai" id="trangthai" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.TrangThai)</span>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" name="btn_create_loaisanpham" class="btn btn-primary">Thêm Mới</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -80,7 +81,7 @@
     </div>
 </div>
 <div class="wrapper">
-    <div class="sidebar" data-image ="../../admin/img/sidebar-5.jpg">
+    <div class="sidebar" data-image="../../admin/img/sidebar-5.jpg">
         <!--
             Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -211,7 +212,7 @@
                     </ul>
                 </div>
             </div>
-            
+
         </nav>
 
         <div class="content">
@@ -255,7 +256,7 @@
                                         <td>
                                             <button type="button" name="edit_loaisanpham" data-idloaisp="@item.ID" class="btn btn-primary" data-toggle="modal" data-target="#EditModal">Edit</button>
                                             <button type="button" name="btn_delete_loaisanpham" data-idloaisp="@item.ID" class="btn btn-danger">Delete</button>
-                                     
+
                                         </td>
                                     </tr>
                                 }
@@ -269,11 +270,11 @@
         @section Scripts{
             @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
             <script>
-                function addLoaiSP() {           
-                        var insert = {};
-                        insert.TenLoai = $("#tenloai").val();
-                        insert.NhaCungCap = parseInt($("#ncc").val());
-                        insert.TrangThai = $("#trangthai").val();
+                function addLoaiSP() {
+                    var insert = {};
+                    insert.TenLoai = $("#tenloai").val();
+                    insert.NhaCungCap = parseInt($("#ncc").val());
+                    insert.TrangThai = $("#trangthai").val();
                     $.ajax({
                         url: "../../api/LoaiSanPhamApi/PostLoaiSanPhamModel",
                         type: "POST",
@@ -283,13 +284,13 @@
                     }).done(function (reponse) {
                         alert('Thêm vào loại sản phẩm thành công!');
                         location.reload();
-                    }).fail(function (){
+                    }).fail(function () {
                         alert('Thất bại !');
                     });
                 }
                 function getLoaiSP(id) {
                     $.ajax({
-                        url: "../../api/LoaiSanPhamApi/GetLoaiSanPhamModel/"+id,
+                        url: "../../api/LoaiSanPhamApi/GetLoaiSanPhamModel/" + id,
                         type: "GET",
                         contentType: "Application/json;charset-utf-8",
                         dataType: "json"
@@ -298,7 +299,7 @@
                         $("#edit_tenloai").val(reponse.tenLoai);
                         $("#edit_ncc").val(reponse.nhaCungCap);
                         $("#edit_trangthai").val(reponse.trangThai);
-                        
+
                     }).fail(function () {
                         alert('Thất bại !');
                     });
@@ -310,7 +311,7 @@
                     update.NhaCungCap = parseInt($("#edit_ncc").val());
                     update.TrangThai = $("#edit_trangthai").val();
                     $.ajax({
-                        url: "../../api/LoaiSanPhamApi/PutLoaiSanPhamModel/"+id,
+                        url: "../../api/LoaiSanPhamApi/PutLoaiSanPhamModel/" + id,
                         type: "PUT",
                         contentType: "Application/json;charset-utf-8",
                         data: JSON.stringify(update),
@@ -323,7 +324,7 @@
                     });
                 }
                 function deleteLoaiSP(id) {
-                    
+
                     $.ajax({
                         url: "../../api/LoaiSanPhamApi/DeleteLoaiSanPhamModel/" + id,
                         type: "DELETE",
@@ -336,8 +337,7 @@
                         alert('Thất bại !');
                     });
                 }
-                $(document).ready(function ()
-                {
+                $(document).ready(function () {
                     $('button[name=btn_create_loaisanpham]').click(function (e) {
                         addLoaiSP();
                         e.preventDefault();
@@ -358,6 +358,6 @@
                         e.preventDefault();
                     });
                 });
-            
+
             </script>
         }

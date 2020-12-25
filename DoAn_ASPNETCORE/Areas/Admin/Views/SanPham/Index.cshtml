@@ -195,46 +195,46 @@
                             <tbody>
                                 @foreach (var item in Model.SanPhams)
                                 {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TenSP)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.MaLoai)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DanhMuc)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Gia)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.GiaMoi)
-                                    </td>
-                                    <td>
-                                        <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" class="img-thumbnail" />
-                                    </td>
-                                    <td>
-                                        <img src="~/images/@Html.DisplayFor(modelItem => item.Image_List)" class="img-thumbnail" />
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Size)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.SoLuong)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.NgayLap)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TrangThai)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TenSP)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MaLoai)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DanhMuc)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Gia)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.GiaMoi)
+                                        </td>
+                                        <td>
+                                            <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" class="img-thumbnail" />
+                                        </td>
+                                        <td>
+                                            <img src="~/images/@Html.DisplayFor(modelItem => item.Image_List)" class="img-thumbnail" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Size)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SoLuong)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NgayLap)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TrangThai)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
@@ -242,4 +242,3 @@
                 </div>
             </div>
         </div>
-

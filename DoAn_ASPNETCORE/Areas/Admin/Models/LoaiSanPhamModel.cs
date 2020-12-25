@@ -11,12 +11,13 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
     {
         [Key]
         public int ID { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng nhập tên loại")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Tên loại 50 kí tự")]
         public string TenLoai { get; set; }
         public int NhaCungCap { get; set; }
         [ForeignKey("NhaCungCap")]
         public virtual NhaCungCapModel MaNCC { set; get; }
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng nhập trạng thái")]
         public string TrangThai { get; set; }
         public ICollection<SanPhamModel> lstSanPham { set; get; }
     
