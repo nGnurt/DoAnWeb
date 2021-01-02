@@ -23,31 +23,6 @@ namespace DoAn_ASPNETCORE.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var DsNewProducts = (from m in _context.SanPhamModel
-                           where m.DanhMuc=="DM1"
-                           select m).Take(4).ToList();
-
-            var DsLastedProducts = (from m in _context.SanPhamModel
-                                    where m.DanhMuc == "DM2"
-                                    select m).Take(4).ToList();
-            ViewBag.LastedProducts = DsLastedProducts;
-          
-
-            ViewBag.NewProducts = DsNewProducts;
-
-            var Loai = (from l in _context.LoaiSanPhamModel
-                                
-                                 select l).ToList();
-            ViewBag.TenL = Loai;
-
-
-            var BetsSell = (from l in _context.SanPhamModel
-                            where l.DanhMuc == "DM3"
-                            select l).Take(4).ToList();
-            ViewBag.BestSellers = BetsSell;
-
-            ViewBag.Username = HttpContext.Session.GetString("username");
-
 
             return View();
         }
