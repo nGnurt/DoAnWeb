@@ -89,12 +89,13 @@ namespace DoAn_ASPNETCORE.Areas.Api
         public async Task<ActionResult<LoaiSanPhamModel>> DeleteLoaiSanPhamModel(int id)
         {
             var loaiSanPhamModel = await _context.LoaiSanPhamModel.FindAsync(id);
+            loaiSanPhamModel.TrangThai = "0";
             if (loaiSanPhamModel == null)
             {
                 return NotFound();
             }
 
-            _context.LoaiSanPhamModel.Remove(loaiSanPhamModel);
+            _context.Entry(loaiSanPhamModel).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return loaiSanPhamModel;

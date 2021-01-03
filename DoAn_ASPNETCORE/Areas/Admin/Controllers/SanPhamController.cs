@@ -172,7 +172,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
                         //Doi ten anh moi thanh ID.jpg
 
                         string s1 = sanPhamModel.ID + "2nd" + "." + ful1.FileName.Split(".")[ful1.FileName.Split(".").Length - 1];
-                        var path1 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", sanPhamModel.Image_List);
+                        var path1 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/");
                         if (System.IO.File.Exists(path1))
                         {
                             //Kiem tra ten anh moi co trung anh cu khong?

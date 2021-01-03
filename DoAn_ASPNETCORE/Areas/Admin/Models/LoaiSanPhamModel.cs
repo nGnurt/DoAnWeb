@@ -18,6 +18,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         [ForeignKey("NhaCungCap")]
         public virtual NhaCungCapModel MaNCC { set; get; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng nhập trạng thái")]
+        [RegularExpression(@"^[0-1]{1}", ErrorMessage = "Trạng thái 0 hoặc 1")]
         public string TrangThai { get; set; }
         public ICollection<SanPhamModel> lstSanPham { set; get; }
     

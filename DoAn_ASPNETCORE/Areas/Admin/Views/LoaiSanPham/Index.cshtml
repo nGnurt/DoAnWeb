@@ -5,7 +5,51 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
- 
+<div id="successModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <i class="material-icons">&#xE876;</i>
+                </div>
+                <h4 class="modal-title w-100">Thêm Thành Công!</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" style="margin-left:90px;" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box" style="background:#b22222">
+                    <i  class="material-icons">&#xE872;</i>
+                </div>
+                <h4 class="modal-title w-100">Xóa Thành Công!</h4>
+            </div>
+            <div class="modal-footer" >
+                <button type="button" style="margin-left:90px;background:#b22222" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="updateModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box" style="background:#3205cd">
+                    <i class="material-icons">&#xE86A;</i>
+                </div>
+                <h4 class="modal-title w-100">Cập Nhật Thành Công!</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" style="margin-left:90px;background:#3205cd" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -22,7 +66,7 @@
                         <label asp-for="TenLoai" class="control-label"></label>
                         <input id="tenloai" asp-for="TenLoai" class="form-control" />
                         <span class="text-danger">@Html.ValidationMessageFor(model => model.TenLoai)</span>
-                    
+
                     </div>
                     <div class="form-group">
                         <label asp-for="NhaCungCap" class="control-label"></label>
@@ -47,7 +91,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm loại sản phẩm</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Sửa loại sản phẩm</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -59,7 +103,7 @@
                     <div class="form-group">
                         <label asp-for="TenLoai" class="control-label"></label>
                         <input asp-for="TenLoai" id="edit_tenloai" class="form-control" />
-                        <span asp-validation-for="TenLoai" class="text-danger"></span>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.TenLoai)</span>
                     </div>
                     <div class="form-group">
                         <label asp-for="NhaCungCap" class="control-label"></label>
@@ -69,7 +113,7 @@
                     <div class="form-group">
                         <label asp-for="TrangThai" class="control-label"></label>
                         <input asp-for="TrangThai" id="edit_trangthai" class="form-control" />
-                        <span asp-validation-for="TrangThai" class="text-danger"></span>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.TrangThai)</span>
                     </div>
                 </form>
             </div>
@@ -282,8 +326,9 @@
                         data: JSON.stringify(insert),
                         dataType: "json"
                     }).done(function (reponse) {
-                        alert('Thêm vào loại sản phẩm thành công!');
-                        location.reload();
+                        $("#AddModal").modal('hide');
+                        $("#successModal").modal('show');
+                     
                     }).fail(function () {
                         alert('Thất bại !');
                     });
@@ -317,8 +362,9 @@
                         data: JSON.stringify(update),
                         dataType: "json"
                     }).done(function (reponse) {
-                        alert('Update sản phẩm thành công!');
-                        location.reload();
+                        $("#EditModal").modal('hide');
+                        $("#updateModal").modal('show');
+                       
                     }).fail(function () {
                         alert('Thất bại !');
                     });
@@ -331,8 +377,9 @@
                         contentType: "Application/json;charset-utf-8",
                         dataType: "json"
                     }).done(function (reponse) {
-                        alert('Xóa sản phẩm thành công!');
-                        location.reload();
+                        $("#deleteModal").modal('show');
+                        
+                        
                     }).fail(function () {
                         alert('Thất bại !');
                     });
@@ -356,6 +403,9 @@
                         var id = $(this).data("idloaisp");
                         deleteLoaiSP(id);
                         e.preventDefault();
+                    });
+                    $('button[name=btn_ok]').click(function (e) {
+                        location.reload();
                     });
                 });
 
