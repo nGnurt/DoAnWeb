@@ -73,7 +73,9 @@
                         </p>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+
+
+                    @*<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
                         <ul id="myTab" class="nav1 nav1-tabs left-tab" role="tablist">
                             <ul id="myTab" class="nav nav-tabs left-tab" role="tablist">
                                 <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><img src="~/images/menu1.png"></a></li>
@@ -117,7 +119,9 @@
 
                                 </div>
                             </div>
-                    </div>
+                    </div>*@
+                    @await Component.InvokeAsync("Smartphone",new { id=2})
+
                 </div>
                 <div class="clearfix"> </div>
             </div>
