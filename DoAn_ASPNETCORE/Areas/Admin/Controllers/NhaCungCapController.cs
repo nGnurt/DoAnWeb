@@ -21,28 +21,37 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         }
 
         // GET: Admin/NhaCungCap
-        public async Task<IActionResult> Index(string searchString)
+        //public async Task<IActionResult> Index(string searchString)
+        //{
+        //    IQueryable<string> genreQuery = from m in _context.NhaCungCapModel select m.TenNCC;
+        //    var nhacungcaps = from m in _context.NhaCungCapModel
+        //                   select m;
+        //    if (!string.IsNullOrEmpty(searchString))
+        //    {
+        //        nhacungcaps = nhacungcaps.Where(s => s.TenNCC.Contains(searchString));
+        //    }
+
+        //    var NhaCungCapViewModel = new NhaCungCapViewModel
+        //    {
+        //        DSNhaCungCap = new SelectList(await genreQuery.Distinct().ToListAsync()),
+        //        NhaCungCaps = await nhacungcaps.ToListAsync()
+
+        //    };
+        //    return View(NhaCungCapViewModel);
+        //  ;
+        //}
+
+        public async Task<IActionResult> Index()
         {
-            IQueryable<string> genreQuery = from m in _context.NhaCungCapModel select m.TenNCC;
+          
             var nhacungcaps = from m in _context.NhaCungCapModel
-                           select m;
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                nhacungcaps = nhacungcaps.Where(s => s.TenNCC.Contains(searchString));
-            }
-
-            var NhaCungCapViewModel = new NhaCungCapViewModel
-            {
-                DSNhaCungCap = new SelectList(await genreQuery.Distinct().ToListAsync()),
-                NhaCungCaps = await nhacungcaps.ToListAsync()
-
-            };
-            return View(NhaCungCapViewModel);
-          ;
+                              select m;
+            ViewBag.DsNCC = nhacungcaps;
+            return View();
         }
 
-        // GET: Admin/NhaCungCap/Details/5
-        public async Task<IActionResult> Details(int? id)
+            // GET: Admin/NhaCungCap/Details/5
+            public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {

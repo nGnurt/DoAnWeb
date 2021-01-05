@@ -35,7 +35,7 @@
                                     <h6><a href="~/pages/single">@item.TenSP</a></h6>
                                     <span class="size">XL / XXL / S </span>
                                     <p><del>@item.Gia</del><em class="item_price">@item.GiaMoi</em></p>
-                                    <a href="~/Pages/detail/@item.ID" data-text="Add To Cart" class="my-cart-b item_add">Add To Cart</a>
+                                    <a asp-controller="Cart" asp-action="Buy" asp-route-id="@item.ID" data-text="Add To Cart" data-text="Add To Cart" class="my-cart-b item_add">Add To Cart</a>
                                 </div>
                             </div>
                         </div>
