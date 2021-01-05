@@ -100,6 +100,7 @@
             <div class="modal-body">
                 <form>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" id="edit_id" asp-for="ID" />
                     <div class="form-group">
                         <label asp-for="TenNCC" class="control-label"></label>
                         <input id="edit_tenncc" asp-for="TenNCC" class="form-control" />
@@ -343,7 +344,7 @@
                         contentType: "Application/json;charset-utf-8",
                         dataType: "json"
                     }).done(function (reponse) {
-
+                        $("#edit_id").val(reponse.id);
                         $("#edit_tenncc").val(reponse.tenNCC);
                         $("#edit_diachi").val(reponse.diaChi);
                         $("#edit_trangthai").val(reponse.trangThai);
