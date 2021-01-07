@@ -45,9 +45,6 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
             //    DSLoaisp= new SelectList(await genreQuery.Distinct().ToListAsync()),
             //    LoaiSP = await webbanhang.ToListAsync()
             //};
-            var DsLoaiSanPham = from m in _context.LoaiSanPhamModel
-                                 select m;
-            ViewBag.DsLoaiSP = DsLoaiSanPham;
             ViewData["NhaCungCap"] = new SelectList(_context.Set<NhaCungCapModel>(), "ID", "ID");
             return View();
 

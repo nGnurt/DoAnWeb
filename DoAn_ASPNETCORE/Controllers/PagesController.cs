@@ -29,12 +29,9 @@ namespace DoAn_ASPNETCORE.Controllers
 
         public async Task<IActionResult> products(int? id)
         {
-            var iphone = (from m in _context.SanPhamModel
-                                 where m.MaLoai ==id
-                                 select m).ToList();
           
-            ViewBag.Loai = iphone;
             ViewBag.Username = HttpContext.Session.GetString("username");
+            ViewBag.id = id;
             return View();
         }
 

@@ -4,7 +4,11 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
+@section css{ 
+    <script>
+        
+    </script>
+}
 <div id="successModal" class="modal fade">
     <div class="modal-dialog modal-confirm">
         <div class="modal-content">
@@ -263,49 +267,29 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4">
-
                         <p>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Thêm</button>
                         </p>
-
-
                         <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.TenLoai)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.MaNCC)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.TrangThai)
-                                    </th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in ViewBag.DsLoaiSP)
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.TenLoai
-                                        </td>
-                                        <td>
-                                            @item.NhaCungCap
-                                        </td>
-                                        <td>
-                                            @item.TrangThai
-                                        </td>
-                                        <td>
-                                            <button type="button" name="edit_loaisanpham" data-idloaisp="@item.ID" class="btn btn-primary" data-toggle="modal" data-target="#EditModal">Edit</button>
-                                            <button type="button" name="btn_delete_loaisanpham" data-idloaisp="@item.ID" class="btn btn-danger">Delete</button>
-
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TenLoai)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MaNCC)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TrangThai)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="dsloaisp">
+                    @*load ds dùng js*@
+            </tbody>
+        </table>
+   
                     </div>
                 </div>
             </div>
@@ -313,40 +297,62 @@
 
         @section Scripts{
             @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-            <script>
+    <script>
+        window.onload = function () {
+            $.ajax({
+                url: "../../api/LoaiSanPhamApi/GetLoaiSanPhamModel",
+                type: "GET",
+                contentType: "Application/json;charset-utf-8",
+            }).done(function (reponse) {
+                console.log(reponse);
+                var newHtml = "";
+                $.each(reponse, function (index,loaiSP) {
+                    newHtml += '<tr><td>' + loaiSP.tenLoai + '</td>';
+                    newHtml += '<td>' + loaiSP.nhaCungCap + '</td>';
+                    newHtml += '<td>' + loaiSP.trangThai + '</td>';
+                    newHtml += '<td>' + '<button type="button" name="edit_loaisanpham" data-idloaisp="' + loaiSP.id + '" class="btn btn-primary" data-toggle="modal" data-target="#EditModal">Edit</button>';
+                    newHtml += '<button type="button" name="btn_delete_loaisanpham" data-idloaisp="' + loaiSP.id + '" class="btn btn-danger">Delete</button></tr>';    
+                });
+                $("#dsloaisp").empty();
+                $("#dsloaisp").html(newHtml);
+            }).fail(function () {
+                alert('Thất bại !');
+                });
+
+        }
                 function addLoaiSP() {
-                    var insert = {};
-                    insert.TenLoai = $("#tenloai").val();
-                    insert.NhaCungCap = parseInt($("#ncc").val());
-                    insert.TrangThai = $("#trangthai").val();
-                    $.ajax({
-                        url: "../../api/LoaiSanPhamApi/PostLoaiSanPhamModel",
-                        type: "POST",
-                        contentType: "Application/json;charset-utf-8",
-                        data: JSON.stringify(insert),
-                        dataType: "json"
-                    }).done(function (reponse) {
-                        $("#AddModal").modal('hide');
-                        $("#successModal").modal('show');
-                     
-                    }).fail(function () {
-                        alert('Thất bại !');
-                    });
+                var insert = {};
+                insert.TenLoai = $("#tenloai").val();
+                insert.NhaCungCap = parseInt($("#ncc").val());
+                insert.TrangThai = $("#trangthai").val();
+                $.ajax({
+                url: "../../api/LoaiSanPhamApi/PostLoaiSanPhamModel",
+                type: "POST",
+                contentType: "Application/json;charset-utf-8",
+                data: JSON.stringify(insert),
+                dataType: "json"
+                }).done(function (reponse) {
+                $("#AddModal").modal('hide');
+                $("#successModal").modal('show');
+
+                }).fail(function () {
+                alert('Thất bại !');
+                });
                 }
                 function getLoaiSP(id) {
                     $.ajax({
-                        url: "../../api/LoaiSanPhamApi/GetLoaiSanPhamModel/" + id,
-                        type: "GET",
-                        contentType: "Application/json;charset-utf-8",
-                        dataType: "json"
+                    url: "../../api/LoaiSanPhamApi/GetLoaiSanPhamModel/" + id,
+                    type: "GET",
+                    contentType: "Application/json;charset-utf-8",
+                    dataType: "json"
                     }).done(function (reponse) {
-                        $("#edit_id").val(reponse.id);
-                        $("#edit_tenloai").val(reponse.tenLoai);
-                        $("#edit_ncc").val(reponse.nhaCungCap);
-                        $("#edit_trangthai").val(reponse.trangThai);
+                    $("#edit_id").val(reponse.id);
+                    $("#edit_tenloai").val(reponse.tenLoai);
+                    $("#edit_ncc").val(reponse.nhaCungCap);
+                    $("#edit_trangthai").val(reponse.trangThai);
 
-                    }).fail(function () {
-                        alert('Thất bại !');
+                }).fail(function () {
+                    alert('Thất bại !');
                     });
                 }
                 function updateLoaiSP(id) {
@@ -356,58 +362,59 @@
                     update.NhaCungCap = parseInt($("#edit_ncc").val());
                     update.TrangThai = $("#edit_trangthai").val();
                     $.ajax({
-                        url: "../../api/LoaiSanPhamApi/PutLoaiSanPhamModel/" + id,
-                        type: "PUT",
-                        contentType: "Application/json;charset-utf-8",
-                        data: JSON.stringify(update),
-                        dataType: "json"
-                    }).done(function (reponse) {
-                        $("#EditModal").modal('hide');
-                        $("#updateModal").modal('show');
-                       
-                    }).fail(function () {
-                        alert('Thất bại !');
+                    url: "../../api/LoaiSanPhamApi/PutLoaiSanPhamModel/" + id,
+                    type: "PUT",
+                    contentType: "Application/json;charset-utf-8",
+                    data: JSON.stringify(update),
+                    dataType: "json"
+                }).done(function (reponse) {
+                    $("#EditModal").modal('hide');
+                    $("#updateModal").modal('show');
+
+                }).fail(function () {
+                    alert('Thất bại !');
                     });
                 }
                 function deleteLoaiSP(id) {
 
                     $.ajax({
-                        url: "../../api/LoaiSanPhamApi/DeleteLoaiSanPhamModel/" + id,
-                        type: "DELETE",
-                        contentType: "Application/json;charset-utf-8",
-                        dataType: "json"
+                    url: "../../api/LoaiSanPhamApi/DeleteLoaiSanPhamModel/" + id,
+                    type: "DELETE",
+                    contentType: "Application/json;charset-utf-8",
+                    dataType: "json"
                     }).done(function (reponse) {
-                        $("#deleteModal").modal('show');
-                        
-                        
-                    }).fail(function () {
-                        alert('Thất bại !');
+                    $("#deleteModal").modal('show');
+
+
+                }).fail(function () {
+                    alert('Thất bại !');
                     });
-                }
+                  }
                 $(document).ready(function () {
                     $('button[name=btn_create_loaisanpham]').click(function (e) {
-                        addLoaiSP();
-                        e.preventDefault();
+                    addLoaiSP();
+                    e.preventDefault();
                     });
                     $('button[name=edit_loaisanpham]').click(function (e) {
-                        var id = $(this).data("idloaisp");
-                        getLoaiSP(id);
-                        e.preventDefault();
+                    var id = $(this).data("idloaisp");
+                    getLoaiSP(id);
+                    e.preventDefault();
                     });
                     $('button[name=btn_update_loaisanpham]').click(function (e) {
-                        var id = $("#edit_id").val();
-                        updateLoaiSP(id);
-                        e.preventDefault();
+                    var id = $("#edit_id").val();
+                    updateLoaiSP(id);
+                    e.preventDefault();
                     });
                     $('button[name=btn_delete_loaisanpham]').click(function (e) {
-                        var id = $(this).data("idloaisp");
-                        deleteLoaiSP(id);
-                        e.preventDefault();
+                    var id = $(this).data("idloaisp");
+                    deleteLoaiSP(id);
+                    e.preventDefault();
                     });
                     $('button[name=btn_ok]').click(function (e) {
-                        location.reload();
+                    location.reload();
                     });
                 });
 
-            </script>
+    </script>
+
         }
