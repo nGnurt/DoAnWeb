@@ -27,6 +27,7 @@ namespace DoAn_ASPNETCORE
             services.AddControllersWithViews();
             services.AddDbContext<Webbanhang>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("Webbanhang")));
+
             services.AddAntiforgery(o => o.HeaderName = "CSRF-TOKEN");
             services.AddDistributedMemoryCache();           // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
             services.AddSession(options =>

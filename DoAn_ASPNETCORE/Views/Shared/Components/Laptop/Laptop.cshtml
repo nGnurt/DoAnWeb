@@ -29,7 +29,8 @@
                                         <h6 style="height:50px;"><a href="~/pages/single/@item.ID">@item.TenSP</a></h6>
                                         <span class="size" style="height:50px;">@item.Size </span>
                                         <p style="height:50px;"><del>@item.Gia</del><em class="item_price">@item.GiaMoi</em></p>
-                                        <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Add To Cart</a>
+                                        <a asp-route="addcart" 
+                   asp-route-productid="@item.ID" data-text="Add To Cart" class="my-cart-b item_add">Add To Cart</a>
                                     </div>
                                 </div>
                             </div>

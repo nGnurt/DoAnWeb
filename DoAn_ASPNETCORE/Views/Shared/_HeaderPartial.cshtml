@@ -1,6 +1,5 @@
 ﻿<!--header-->
 
-
 <div class="header">
     <div class="header-top">
         <div class="container">
@@ -55,9 +54,9 @@
                                             <div class="col-sm-3  multi-gd-img">
                                                 <ul class="multi-column-dropdown">
                                                     <h6>MENU</h6>
-                                                        <li><a href="~/pages/products/1">Sam Sung</a></li>
-                                                        <li><a href="~/pages/products/2">IPhone</a></li>
-                                                  
+                                                    <li><a href="~/pages/products/1">Sam Sung</a></li>
+                                                    <li><a href="~/pages/products/2">IPhone</a></li>
+
                                                 </ul>
                                             </div>
 
@@ -114,18 +113,20 @@
                         <a href="~/user/pages/checkout">
                             <h3>
                                 <div class="total">
-                                    <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
+                                    @*<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)*@
+
+                                   
                                 </div>
-                                <img src="~/user/images/bag.png" alt="" />
-                            </h3>
-                        </a>
-                        <p><a asp-controller="Cart" asp-action="Index" class="simpleCart_empty">Empty Cart</a></p>
-                        <div class="clearfix"> </div>
+                                    <img src="~/user/images/bag.png" alt="" />
+                                </h3>
+                            </a>
+                            <p><a asp-controller="Pages" asp-action="Cart" class="simpleCart_empty">Empty Cart</a></p>
+                            <div class="clearfix"> </div>
+                        </div>
                     </div>
+                    <div class="clearfix"> </div>
                 </div>
-                <div class="clearfix"> </div>
             </div>
         </div>
     </div>
-</div>
-<!--header-->
+    <!--header-->
