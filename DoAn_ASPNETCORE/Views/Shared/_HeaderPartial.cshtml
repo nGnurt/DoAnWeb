@@ -11,7 +11,7 @@
                     <li><a href="~/pages/checkout">Checkout</a></li>
                     @if (string.IsNullOrEmpty(ViewBag.Username))
                     {
-                        <li><a href="~/pages/login">Login</a></li>
+                        <li><a href="~/login/index">Login</a></li>
 
                     }
                     else
@@ -20,7 +20,7 @@
                         <li><a onclick="DeleteSession()" href="javascript:">Log out</a></li>
                     }
 
-                    <li><a href="~/pages/registered"> Create Account </a></li>
+                    <li><a asp-area="Admin" asp-controller="User" asp-action="Create"> Create Account </a></li>
                 </ul>
             </div>
             <div class="clearfix"></div>
