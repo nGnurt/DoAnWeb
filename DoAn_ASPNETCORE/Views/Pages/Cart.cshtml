@@ -46,13 +46,13 @@
             </tr>
         }
         <tr>
-            <td colspan="4" class="text-right">Tổng tiền</td>
-            <td>@(total.ToString("n0"))</td>
+            <td colspan="4" class="text-right">Thành Tiền</td>
+            <td><b>@(total.ToString("n0")) Đồng</b></td>
             <td></td>
         </tr>
     </table>
 
-    <a asp-controller="Product" asp-action="Checkout" class="btn btn-success">Gửi đơn hàng</a>
+    <a asp-controller="Pages" asp-action="Checkout" class="btn btn-success">Checkout</a>
 
     @section Scripts {
         <script>

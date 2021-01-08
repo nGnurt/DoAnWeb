@@ -101,6 +101,18 @@ namespace DoAn_ASPNETCORE.Controllers
         }
 
 
+        public async Task<IActionResult>search(String search)
+        {
+            ViewData["getSearch"] = search;
+            var sch = from x in _context.SanPhamModel select x;
+          
+            if(! String.IsNullOrEmpty(search))
+            {
+                sch = sch.Where(x => x.TenSP.Contains(search));
+            }
+            return View(await sch.AsNoTracking().ToListAsync());
+        }
+
         public const string CARTKEY = "cart";
 
         // Lấy cart từ Session (danh sách CartItem)
@@ -206,5 +218,30 @@ namespace DoAn_ASPNETCORE.Controllers
             SaveCartSession(cart);
             return RedirectToAction(nameof(Cart));
         }
+
+
+        [Route("/checkout")]
+        public IActionResult CheckOut([FromForm] string email, [FromForm] string address)
+        {
+
+            // Xử lý khi đặt hàng
+            var cart = GetCartItems();
+            ViewData["email"] = email;
+            ViewData["address"] = address;
+            ViewData["cart"] = cart;
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                // hãy tạo cấu trúc db lưu lại đơn hàng và xóa cart khỏi session
+
+                ClearCart();
+                RedirectToAction(nameof(Index));
+            }
+
+            return View();
+        }
+
+
+
     }
 }
