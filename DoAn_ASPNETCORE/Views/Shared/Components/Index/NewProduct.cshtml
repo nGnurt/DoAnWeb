@@ -34,7 +34,8 @@
                             <h6><a href="~/pages/single/@item.ID">@item.TenSP</a></h6>
                             <span class="size">@item.Size</span>
                             <p><del>@item.Gia VND</del><em class="item_price">@item.GiaMoi VND  </em></p>
-                            <a  asp-controller="Cart" asp-action="Buy" asp-route-id="@item.ID"  data-text="Add To Cart" class="my-cart-b item_add">Add To Cart</a>
+                            <a asp-route="addcart" 
+                   asp-route-productid="@item.ID" data-text="Add To Cart"  class="my-cart-b item_add">Add To Cart</a>
                         </div>
                     </div>
 
@@ -44,3 +45,42 @@
         </div>
     </div>
 </div>
+
+
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".ajax-add-to-cart").click(function () {
+                $.ajax({
+                    url: "/Cart/Buy",
+                    data: {
+                        id: $(this).data("id"),
+                        SoLuong: 1,
+                        type: "ajax"
+                    },
+                    success: function (data) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thêm giỏ hàng thành công',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                        console.log(data.soLuong);
+                        $("#cart_count").html(data.soLuong);
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Thêm giỏ hàng thất bại',
+                            text: 'Vui lòng thử lại',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
