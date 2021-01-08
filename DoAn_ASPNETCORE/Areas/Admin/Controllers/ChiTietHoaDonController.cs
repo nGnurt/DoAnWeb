@@ -21,8 +21,9 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         }
 
         // GET: Admin/ChiTietHoaDon
-        public async Task<IActionResult> Index(int searchInt)
+        public async Task<IActionResult> Index() //(int searchInt)
         {
+            /*
             IQueryable<int> genreQuery = from m in _context.ChiTietHoaDonModel
 
                                             select m.HoaDon_ID;
@@ -41,8 +42,10 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
                 DSCTHD = new SelectList(await genreQuery.Distinct().ToListAsync()),
                 ChiTietHoaDons = await ChiTietHoaDon.ToListAsync()
             };
-
-            return View(ChiTietHoaDon1);
+            */
+            ViewBag.dscthd = from m in _context.ChiTietHoaDonModel
+                             select m;
+            return View();
            
         }
 
