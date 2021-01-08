@@ -1,5 +1,5 @@
 ﻿
-@model DoAn_ASPNETCORE.Areas.Admin.Models.ChiTietHoaDonViewModel
+@model DoAn_ASPNETCORE.Areas.Admin.Models.ChiTietHoaDonModel
 
 @{
     ViewData["Title"] = "Index";
@@ -161,47 +161,47 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.ChiTietHoaDons[0].HoaDon)
+                                        @Html.DisplayNameFor(model => model.HoaDon_ID)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.ChiTietHoaDons[0].TenSP)
+                                        @Html.DisplayNameFor(model => model.TenSP)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.ChiTietHoaDons[0].SoLuong)
+                                        @Html.DisplayNameFor(model => model.SoLuong)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.ChiTietHoaDons[0].Gia)
+                                        @Html.DisplayNameFor(model => model.Gia)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.ChiTietHoaDons[0].KhuyenMai)
+                                        @Html.DisplayNameFor(model => model.KhuyenMai)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.ChiTietHoaDons[0].ThanhTien)
+                                        @Html.DisplayNameFor(model => model.ThanhTien)
                                     </th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.ChiTietHoaDons)
+                                @foreach (var item in ViewBag.dscthd)
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.HoaDon_ID)
+                                            @item.HoaDon_ID
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.TenSP)
+                                            @item.TenSP
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.SoLuong)
+                                            @item.SoLuong
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Gia)
+                                            @item.Gia
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.KhuyenMai)
+                                            @item.KhuyenMai
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.ThanhTien)
+                                            @item.ThanhTien
                                         </td>
                                         <td>
                                             <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

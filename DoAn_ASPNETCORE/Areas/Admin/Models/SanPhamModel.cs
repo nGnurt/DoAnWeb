@@ -27,7 +27,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         public string MoTa { get; set; }
         public DateTime NgayLap { get; set; }
         public string TrangThai { get; set; }
-        public ICollection<ChiTietHoaDonModel> lstChiTietHoaDon { set; get; }
+        
 
     }
 }

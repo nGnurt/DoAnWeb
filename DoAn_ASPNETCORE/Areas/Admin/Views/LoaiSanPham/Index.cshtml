@@ -6,7 +6,7 @@
 }
 @section css{ 
     <script>
-        
+       
     </script>
 }
 <div id="successModal" class="modal fade">
@@ -286,7 +286,8 @@
                 </tr>
             </thead>
             <tbody id="dsloaisp">
-                    @*load ds dùng js*@
+                @*load ds dùng js*@
+               
             </tbody>
         </table>
    
@@ -306,18 +307,19 @@
             }).done(function (reponse) {
                 console.log(reponse);
                 var newHtml = "";
-                $.each(reponse, function (index,loaiSP) {
+
+                $.each(reponse, function (index, loaiSP) {
                     newHtml += '<tr><td>' + loaiSP.tenLoai + '</td>';
                     newHtml += '<td>' + loaiSP.nhaCungCap + '</td>';
                     newHtml += '<td>' + loaiSP.trangThai + '</td>';
-                    newHtml += '<td>' + '<button type="button" name="edit_loaisanpham" data-idloaisp="' + loaiSP.id + '" class="btn btn-primary" data-toggle="modal" data-target="#EditModal">Edit</button>';
-                    newHtml += '<button type="button" name="btn_delete_loaisanpham" data-idloaisp="' + loaiSP.id + '" class="btn btn-danger">Delete</button></tr>';    
+                    newHtml += '<td>' + '<button type="button" id="edit_loaisanpham" data-idloaisp="' + loaiSP.id + '" class="btn btn-primary" data-toggle="modal" data-target="#EditModal">Edit</button>';
+                    newHtml += '<button type="button" id="btn_delete_loaisanpham" data-idloaisp="' + loaiSP.id + '" class="btn btn-danger">Delete</button>' +'</td></tr>';
                 });
-                $("#dsloaisp").empty();
                 $("#dsloaisp").html(newHtml);
             }).fail(function () {
                 alert('Thất bại !');
-                });
+            });
+
 
         }
                 function addLoaiSP() {
@@ -389,32 +391,53 @@
                 }).fail(function () {
                     alert('Thất bại !');
                     });
-                  }
-                $(document).ready(function () {
+        }
+  
+        $(document).ready(function () {
                     $('button[name=btn_create_loaisanpham]').click(function (e) {
                     addLoaiSP();
                     e.preventDefault();
                     });
-                    $('button[name=edit_loaisanpham]').click(function (e) {
-                    var id = $(this).data("idloaisp");
-                    getLoaiSP(id);
-                    e.preventDefault();
-                    });
+
+                    //$('button[name=edit_loaisanpham]').click(function (e) {
+                    //    console.log("OK")
+                    //var id = $(this).data("idloaisp");
+                    //getLoaiSP(id);
+                    //e.preventDefault();
+                    //});
+
+                    /* [https://api.jquery.com/on/]
+                      Liên kết sự kiện bị phá vỡ khi thực hiện ajax cập nhật đoạn html trước khi load page. 
+                      Vì vậy để load trước dsanh, bắt sự kiện tại đoạn html cập nhật thì nên dùng .on() để liên kết sự kiện*/
+
+                     $('body').on('click', '#edit_loaisanpham', function () {
+                            var id = $(this).data("idloaisp");
+                            getLoaiSP(id);
+                            e.preventDefault();
+                     });
+                     $('body').on('click', '#btn_delete_loaisanpham', function () {
+                            var id = $(this).data("idloaisp");
+                             deleteLoaiSP(id);
+                            e.preventDefault();
+                     });
                     $('button[name=btn_update_loaisanpham]').click(function (e) {
                     var id = $("#edit_id").val();
                     updateLoaiSP(id);
                     e.preventDefault();
                     });
-                    $('button[name=btn_delete_loaisanpham]').click(function (e) {
-                    var id = $(this).data("idloaisp");
-                    deleteLoaiSP(id);
-                    e.preventDefault();
-                    });
+
+                    //$('button[name=btn_delete_loaisanpham]').click(function (e) {
+                    //var id = $(this).data("idloaisp");
+                    //deleteLoaiSP(id);
+                    //e.preventDefault();
+                    //});
+                   
                     $('button[name=btn_ok]').click(function (e) {
                     location.reload();
                     });
+      
                 });
-
+            
     </script>
-
-        }
+            }
+        

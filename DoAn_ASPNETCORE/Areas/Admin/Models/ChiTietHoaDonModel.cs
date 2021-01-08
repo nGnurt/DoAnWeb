@@ -13,10 +13,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         [ForeignKey("HoaDon_ID")]
 
         public virtual HoaDonModel HoaDon { set; get; }
-        public int SanPham_ID { get; set; }
-        [ForeignKey("SanPham_ID")]
-       
-        public virtual SanPhamModel SanPham { set; get; }
+        
         public string TenSP { get; set; }
         public int SoLuong { get; set; }
         public int Gia { get; set; }
