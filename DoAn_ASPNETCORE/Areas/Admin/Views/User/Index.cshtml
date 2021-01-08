@@ -1,9 +1,182 @@
-﻿@model DoAn_ASPNETCORE.Areas.Admin.Models.UserViewModel
+﻿@model DoAn_ASPNETCORE.Areas.Admin.Models.UserModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@section css{
+    <script>
+
+    </script>
+}
+<div id="successModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <i class="material-icons">&#xE876;</i>
+                </div>
+                <h4 class="modal-title w-100">Thêm Thành Công!</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" style="margin-left:90px;" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box" style="background:#b22222">
+                    <i class="material-icons">&#xE872;</i>
+                </div>
+                <h4 class="modal-title w-100">Xóa Thành Công!</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" style="margin-left:90px;background:#b22222" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="updateModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box" style="background:#3205cd">
+                    <i class="material-icons">&#xE86A;</i>
+                </div>
+                <h4 class="modal-title w-100">Cập Nhật Thành Công!</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" style="margin-left:90px;background:#3205cd" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="UserName" class="control-label"></label>
+                        <input id="username" asp-for="UserName" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.UserName)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input id="password" asp-for="Password" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Password)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HoTen" class="control-label"></label>
+                        <input id="hoten" asp-for="HoTen" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.HoTen)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DiaChi" class="control-label"></label>
+                        <input id="diachi" asp-for="DiaChi" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.DiaChi)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input id="email" asp-for="Email" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Email)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Sdt" class="control-label"></label>
+                        <input id="sdt" asp-for="Sdt" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Sdt)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Loai" class="control-label"></label>
+                        <input id="loai" asp-for="Loai" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Loai)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TrangThai" class="control-label"></label>
+                        <input id="trangthai" asp-for="TrangThai" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.TrangThai)</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" name="btn_create_user" class="btn btn-primary">Thêm Mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sửa User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" id="edit_id" asp-for="ID" />
+                    <div class="form-group">
+                        <label asp-for="UserName" class="control-label"></label>
+                        <input id="username" asp-for="UserName" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.UserName)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input id="password" asp-for="Password" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Password)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HoTen" class="control-label"></label>
+                        <input id="hoten" asp-for="HoTen" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.HoTen)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DiaChi" class="control-label"></label>
+                        <input id="diachi" asp-for="DiaChi" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.DiaChi)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input id="email" asp-for="Email" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Email)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Sdt" class="control-label"></label>
+                        <input id="sdt" asp-for="Sdt" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Sdt)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Loai" class="control-label"></label>
+                        <input id="loai" asp-for="Loai" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Loai)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TrangThai" class="control-label"></label>
+                        <input id="trangthai" asp-for="TrangThai" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.TrangThai)</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" name="btn_update_user" class="btn btn-primary">Cập Nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="wrapper">
     <div class="sidebar" data-image="../../admin/img/sidebar-5.jpg">
         <!--
@@ -143,83 +316,205 @@
                     <div class="col-md-4">
 
                         <p>
-                            <a asp-area="Admin" asp-controller="User" asp-action="Create">Create New</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Thêm</button>
                         </p>
-                        <form asp-controller="User" asp-action="Index" method="get">
-                            <p>
+                        @*<form asp-controller="User" asp-action="Index" method="get">
+                                <p>
 
-                                Tên Sản Phẩm: <input type="text" asp-for="searchString"><button type="submit" class="btn-facebook">Tìm</button>
-                            </p>
-                        </form>
+                                    Tên Sản Phẩm: <input type="text" asp-for="searchString"><button type="submit" class="btn-facebook">Tìm</button>
+                                </p>
+                            </form>*@
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Users[0].UserName)
+                                        @Html.DisplayNameFor(model => model.UserName)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Users[0].Password)
+                                        @Html.DisplayNameFor(model => model.Password)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Users[0].HoTen)
+                                        @Html.DisplayNameFor(model => model.HoTen)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Users[0].DiaChi)
+                                        @Html.DisplayNameFor(model => model.DiaChi)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Users[0].Email)
+                                        @Html.DisplayNameFor(model => model.Email)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Users[0].Sdt)
+                                        @Html.DisplayNameFor(model => model.Sdt)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Users[0].Loai)
+                                        @Html.DisplayNameFor(model => model.Loai)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Users[0].TrangThai)
+                                        @Html.DisplayNameFor(model => model.TrangThai)
                                     </th>
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach (var item in Model.Users)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.UserName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Password)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.HoTen)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.DiaChi)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Email)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Sdt)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Loai)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TrangThai)
-                                        </td>
-                                        <td>
-                                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                                        </td>
-                                    </tr>
-                                }
+                            <tbody id="dsuser">
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
+        @section Scripts{
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            <script>
+                window.onload = function () {
+                    $.ajax({
+                        url: "../../api/UserApi/GetUserModel",
+                        type: "GET",
+                        contentType: "Application/json;charset-utf-8",
+                    }).done(function (reponse) {
+                        console.log(reponse);
+                        var newHtml = "";
+                        $.each(reponse, function (index, User) {
+                            newHtml += '<tr><td>' + User.userName + '</td>';
+                            newHtml += '<td>' + User.passWord + '</td>';
+                            newHtml += '<td>' + User.hoTen + '</td>';
+                            newHtml += '<td>' + User.diaChi + '</td>';
+                            newHtml += '<td>' + User.email + '</td>';
+                            newHtml += '<td>' + User.sdt + '</td>';
+                            newHtml += '<td>' + User.loai + '</td>';
+                            newHtml += '<td>' + User.trangThai + '</td>';
+
+                            newHtml += '<td>' + '<button type="button" id="edit_user" data-iduser="' + User.id + '" class="btn btn-primary" data-toggle="modal" data-target="#EditModal">Edit</button>'
+                            newHtml += '<button type="button" id="btn_delete_user" data-iduser="' + User.id + '" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Delete</button>';
+                        });
+                        $("#dsuser").empty();
+                        $("#dsuser").html(newHtml);
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+
+        }
+                function addUser() {
+                    var insert = {};
+                    insert.UserName = $("#username").val();
+
+                    insert.Password = $("#password").val();
+
+                    insert.HoTen = $("#hoten").val();
+
+                    insert.DiaChi = $("#diachi").val();
+
+                    insert.Email = $("#email").val();
+
+                    insert.Sdt = $("#sdt").val();
+
+                    insert.Loai = $("#loai").val();
+
+                    insert.TrangThai = $("#trangthai").val();
+
+                    $.ajax({
+                        url: "../../api/UserApi/PostUserModel",
+                        type: "POST",
+                        contentType: "Application/json;charset-utf-8",
+                        data: JSON.stringify(insert),
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        $("#AddModal").modal('hide');
+                        $("#successModal").modal('show');
+
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                function getUser(id) {
+                    $.ajax({
+                        url: "../../api/UserApi/GetUserModel/" + id,
+                        type: "GET",
+                        contentType: "Application/json;charset-utf-8",
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        $("#edit_id").val(reponse.id);
+                        $("#edit_username").val(reponse.UserName);
+                        $("#edit_password").val(reponse.Password);
+                        $("#edit_hoten").val(reponse.HoTen);
+                        $("#edit_diachi").val(reponse.DiaChi);
+                        $("#edit_email").val(reponse.Email);
+                        $("#edit_sdt").val(reponse.Sdt);
+                        $("#edit_loai").val(reponse.Loai);
+                        $("#edit_trangthai").val(reponse.TrangThai);
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                function updateUser(id) {
+                    var update = {}
+                    update.ID = parseInt(id);
+                    update.UserName = $("#username").val();
+
+                    update.Password = $("#password").val();
+
+                    update.HoTen = $("#hoten").val();
+
+                    update.DiaChi = $("#diachi").val();
+
+                    update.Email = $("#email").val();
+
+                    update.Sdt = $("#sdt").val();
+
+                    update.Loai = $("#loai").val();
+
+                    update.TrangThai = $("#trangthai").val();
+                    $.ajax({
+                        url: "../../api/UserApi/PutUserModel/" + id,
+                        type: "PUT",
+                        contentType: "Application/json;charset-utf-8",
+                        data: JSON.stringify(update),
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        $("#EditModal").modal('hide');
+                        $("#updateModal").modal('show');
+
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                function deleteUser(id) {
+
+                    $.ajax({
+                        url: "../../api/UserApi/DeleteUserModel/" + id,
+                        type: "DELETE",
+                        contentType: "Application/json;charset-utf-8",
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        $("#deleteModal").modal('show');
+
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                $(document).ready(function () {
+                    $('button[name=btn_create_user]').click(function (e) {
+                        addUser();
+                        e.preventDefault();
+                    });
+                    $('body').on('click','#edit_user',function () {
+                        var id = $(this).data("iduser");
+                        getUser(id);
+                        e.preventDefault();
+                    });
+                    $('button[name=btn_update_user]').click(function (e) {
+                        var id = $("#edit_id").val();
+                        updateUser(id);
+                        e.preventDefault();
+                    });
+                    $('body').on('click','#btn_delete_user',function () {
+                        var id = $(this).data("iduser");
+                        deleteUser(id);
+                        e.preventDefault();
+                    });
+                    $('button[name=btn_ok]').click(function (e) {
+                        location.reload();
+                    });
+                });
+
+            </script>
+        }
 
