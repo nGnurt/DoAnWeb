@@ -43,7 +43,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
                 ChiTietHoaDons = await ChiTietHoaDon.ToListAsync()
             };
             */
-            ViewBag.dscthd = from m in _context.ChiTietHoaDonModel
+            ViewBag.CTHD = from m in _context.ChiTietHoaDonModel
                              select m;
             return View();
            

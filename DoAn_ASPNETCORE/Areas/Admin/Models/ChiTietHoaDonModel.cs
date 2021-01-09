@@ -15,10 +15,10 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         public virtual HoaDonModel HoaDon { set; get; }
         
         public string TenSP { get; set; }
-        public int SoLuong { get; set; }
-        public int Gia { get; set; }
+        public string SoLuong { get; set; }
+        public string Gia { get; set; }
         public int KhuyenMai { get; set; }
         public int ThanhTien { get; set; }
-        
+        public int TrangThai { get; set; }
     }
 }

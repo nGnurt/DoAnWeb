@@ -25,7 +25,7 @@
         </tr>
         @foreach (var cartitem in Model)
         {
-            var thanhtien = cartitem.QuanTity * cartitem.SanPham.Gia;
+            var thanhtien = cartitem.Quantity * cartitem.SanPham.Gia;
             total += thanhtien;
 
             <tr>
@@ -33,7 +33,7 @@
                 <td>@cartitem.SanPham.TenSP</td>
                 <td> <img src="~/images/@cartitem.SanPham.Image" style="height:200px" class="img-responsive" alt=""></td>
                 <td>@(cartitem.SanPham.Gia.ToString("n0"))</td>
-                <td><input asp-for="@cartitem.QuanTity" id="@($"quantity-{cartitem.SanPham.ID}")" /></td>
+                <td><input asp-for="@cartitem.Quantity" id="@($"quantity-{cartitem.SanPham.ID}")" /></td>
                 <td>@(thanhtien.ToString("n0"))</td>
                 <td>
                     <button class="btn btn-success updatecartitem"
@@ -45,11 +45,7 @@
                 </td>
             </tr>
         }
-        <tr>
-            <td colspan="4" class="text-right">Thành Tiền</td>
-            <td><b>@(total.ToString("n0")) Đồng</b></td>
-            <td></td>
-        </tr>
+        
     </table>
 
     <a asp-controller="Pages" asp-action="Checkout" class="btn btn-success">Checkout</a>

@@ -160,12 +160,12 @@ namespace DoAn_ASPNETCORE.Controllers
             if (cartitem != null)
             {
                 // Đã tồn tại, tăng thêm 1
-                cartitem.QuanTity++;
+                cartitem.Quantity++;
             }
             else
             {
                 //  Thêm mới
-                cart.Add(new ItemModel() { QuanTity = 1, SanPham = product });
+                cart.Add(new ItemModel() { Quantity = 1, SanPham = product });
             }
 
             // Lưu cart vào Session
@@ -195,7 +195,7 @@ namespace DoAn_ASPNETCORE.Controllers
             if (cartitem != null)
             {
                 // Đã tồn tại, tăng thêm 1
-                cartitem.QuanTity = quantity;
+                cartitem.Quantity = quantity;
             }
             SaveCartSession(cart);
             // Trả về mã thành công (không có nội dung gì - chỉ để Ajax gọi)
@@ -228,8 +228,8 @@ namespace DoAn_ASPNETCORE.Controllers
             var cart = GetCartItems();
             ViewData["email"] = email;
             ViewData["address"] = address;
-            ViewData["cart"] = cart;
-
+            ViewBag.cart = cart;
+            ViewBag.size = cart.Count;
             if (!string.IsNullOrEmpty(email))
             {
                 // hãy tạo cấu trúc db lưu lại đơn hàng và xóa cart khỏi session
@@ -239,6 +239,24 @@ namespace DoAn_ASPNETCORE.Controllers
             }
 
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DatHang([Bind("ID,User_ID,HoTen,Sdt,ThanhTien,TrangThai")] HoaDonModel hoaDonModel, [Bind("ID,HoaDon_ID,TenSP,SoLuong,Gia,KhuyenMai,ThanhTien,TrangThai")] ChiTietHoaDonModel chitiethoaDonModel)
+        {
+            var HoaDon = from m in _context.HoaDonModel
+                             select m;
+            int size = HoaDon.Count();
+            if (ModelState.IsValid)
+            {
+                _context.Add(hoaDonModel);
+                chitiethoaDonModel.HoaDon_ID = size++;
+                _context.Add(chitiethoaDonModel);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(CheckOut));
         }
 
 

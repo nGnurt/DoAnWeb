@@ -9,6 +9,6 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
     {
 
         public SanPhamModel SanPham { get; set; }
-        public int QuanTity { get; set; }
+        public int Quantity { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Models
         public string HoTen { get; set; }
         public string Sdt { get; set; }
         public int ThanhTien { get; set; }
-        public string TrangThai { get; set; }
+        public int TrangThai { get; set; }
         public ICollection<ChiTietHoaDonModel> lstCTHD { set; get; }
     }
 }

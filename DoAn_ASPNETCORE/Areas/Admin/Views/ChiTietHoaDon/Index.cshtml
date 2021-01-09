@@ -178,37 +178,43 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.ThanhTien)
                                     </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TrangThai)
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in ViewBag.dscthd)
+                                @foreach (var item in ViewBag.CTHD)
                                 {
-                                    <tr>
-                                        <td>
-                                            @item.HoaDon_ID
-                                        </td>
-                                        <td>
-                                            @item.TenSP
-                                        </td>
-                                        <td>
-                                            @item.SoLuong
-                                        </td>
-                                        <td>
-                                            @item.Gia
-                                        </td>
-                                        <td>
-                                            @item.KhuyenMai
-                                        </td>
-                                        <td>
-                                            @item.ThanhTien
-                                        </td>
-                                        <td>
-                                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        @item.HoaDon_ID
+                                    </td>
+                                    <td>
+                                        @item.TenSP
+                                    </td>
+                                    <td>
+                                        @item.SoLuong
+                                    </td>
+                                    <td>
+                                        @item.Gia
+                                    </td>
+                                    <td>
+                                        @item.KhuyenMai
+                                    </td>
+                                    <td>
+                                        @item.ThanhTien
+                                    </td>
+                                    <td>
+                                        @item.TrangThai
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

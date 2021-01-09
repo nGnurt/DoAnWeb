@@ -77,11 +77,18 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,User_ID,HoTen,Sdt,ThanhTien,TrangThai")] HoaDonModel hoaDonModel)
+        public async Task<IActionResult> Create([Bind("ID,User_ID,HoTen,Sdt,ThanhTien,TrangThai")] HoaDonModel hoaDonModel, [Bind("ID,HoaDon_ID,TenSP,SoLuong,Gia,KhuyenMai,ThanhTien,TrangThai")] ChiTietHoaDonModel chitiethoaDonModel)
         {
+            var HoaDon = from m in _context.HoaDonModel
+                         select m;
+            int size = HoaDon.Count();
             if (ModelState.IsValid)
             {
                 _context.Add(hoaDonModel);
+                size++;
+                await _context.SaveChangesAsync();
+                chitiethoaDonModel.HoaDon_ID = size;
+                _context.Add(chitiethoaDonModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
