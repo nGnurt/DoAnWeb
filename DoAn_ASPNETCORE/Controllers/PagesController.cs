@@ -25,7 +25,7 @@ namespace DoAn_ASPNETCORE.Controllers
         }
         public async Task<IActionResult> Index()
         {
-
+            ViewBag.Username = HttpContext.Session.GetString("username");
             return View();
         }
 
@@ -37,6 +37,7 @@ namespace DoAn_ASPNETCORE.Controllers
 
             ViewBag.Loai = iphone;
             ViewBag.Username = HttpContext.Session.GetString("username");
+          
             ViewBag.id = id;
             return View();
         }
@@ -50,11 +51,13 @@ namespace DoAn_ASPNETCORE.Controllers
 
             ViewBag.ChiTiet = detail;
             ViewBag.Username = HttpContext.Session.GetString("username");
+           
             return View();
         }
         public IActionResult Checkout()
         {
             ViewBag.Username = HttpContext.Session.GetString("username");
+           
             return View();
         }
         public IActionResult Products1(int? id)
@@ -65,16 +68,18 @@ namespace DoAn_ASPNETCORE.Controllers
             //ViewBag.LapTop = DsLaptop;
             ViewBag.id = id;
             ViewBag.Username = HttpContext.Session.GetString("username");
+           
             return View();
         }
-        public IActionResult Login()
-        {
-            ViewBag.Username = HttpContext.Session.GetString("username");
-            return View();
-        }
+        //public IActionResult Login()
+        //{
+        //    ViewBag.Username = HttpContext.Session.GetString("username");
+        //    return View();
+        //}
         public IActionResult Registered()
         {
             ViewBag.Username = HttpContext.Session.GetString("username");
+           
             return View();
         }
         public IActionResult Mail()
@@ -84,6 +89,7 @@ namespace DoAn_ASPNETCORE.Controllers
         public IActionResult Single(int? id)
         {
             ViewBag.Username = HttpContext.Session.GetString("username");
+           
             var sanpham = (from m in _context.SanPhamModel
                            where m.ID == id
                            select m).ToList();

@@ -79,6 +79,8 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
             return View();
         }
 
+
+
         // POST: Admin/User/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -90,7 +92,8 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
             {
                 _context.Add(userModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var url = Url.RouteUrl("", new { Controller = "Pages", action = "Index", area = "" });
+                return Redirect(url);
             }
             return View(userModel);
         }
