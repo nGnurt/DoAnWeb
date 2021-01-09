@@ -31,8 +31,8 @@ namespace DoAn_ASPNETCORE.Controllers
             {
                 return View("Index");
             }
-            var str = JsonConvert.SerializeObject(member);
-            HttpContext.Session.SetString("user", str);
+            //var str = JsonConvert.SerializeObject(member);
+            HttpContext.Session.SetString("username", member.UserName);
             if (r[0].Loai == "0")
             {
                 var url = Url.RouteUrl("areas", new { Controller = "SanPham", action = "Index", area = "Admin" });
