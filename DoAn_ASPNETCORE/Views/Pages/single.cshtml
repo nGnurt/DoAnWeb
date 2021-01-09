@@ -65,26 +65,11 @@
                     </div>
                 }
 
-                <div class="col-md-3 single-grid1">
-                    <h3>Recent Products</h3>
-                    <div class="recent-grids">
-                        @foreach (var Recent in ViewBag.Recent)
-                        { 
-                        <div class="recent-left">
-                            <a href="~/user/pages/single"><img class="img-responsive " src="~/images/@Recent.Image" alt=""></a>
-                        </div>
-                        <div class="recent-right">
-                            <h6 class="best2"><a href="~/user/pages/single">@Recent.TenSP </a></h6>
-                            <div class="block">
-                                <div class="starbox small ghosting"> </div>
-                            </div>
-                            <span class=" price-in1">@Recent.Gia VND</span>
-                        </div>
-                        }
-                        <div class="clearfix"> </div>
-                    </div>
-                    
-                </div>
+            <div class="col-md-3 single-grid1">
+                <h3>Recent Products</h3>
+                @await Component.InvokeAsync("Single", new { id = ViewBag.id })
+
+            </div>
                
                 <div class="clearfix"> </div>
             </div>
@@ -290,49 +275,48 @@
         </div>
     </div>
     <!--single-->
-    <div class="new-arrivals-w3agile">
-        <div class="container">
-            <h3 class="tittle1">Best Sellers</h3>
-            <div class="arrivals-grids">
-                @foreach (var item in ViewBag.BestSellers)
-                {
-                    <div class="col-md-3 arrival-grid simpleCart_shelfItem">
-                        <div class="grid-arr">
-                            <div class="grid-arrival">
-                                <figure>
-                                    <a href="#" class="new-gri" data-toggle="modal" data-target="#myModal1">
-                                        <div class="grid-img">
-                                            <img src="~/images/@item.Image" class="img-responsive" alt="">
-                                        </div>
-                                        <div class="grid-img">
-                                            <img src="~/images/@item.Image" class="img-responsive" alt="">
-                                        </div>
-                                    </a>
-                                </figure>
-                            </div>
-                            <div class="ribben">
-                                <p>NEW</p>
-                            </div>
-                            <div class="ribben1">
-                                <p>SALE</p>
-                            </div>
-                            <div class="block">
-                                <div class="starbox small ghosting"> </div>
-                            </div>
-                            <div class="women">
-                                <h6><a href="~/pages/single/@item.ID">@item.TenSP</a></h6>
-                                <span class="size">@item.Size</span>
-                                <p><del>@item.Gia VND</del><em class="item_price">@item.GiaMoi VND</em></p>
-                                <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Add To Cart</a>
-                            </div>
-
+    <div class="container">
+        <h3 class="tittle1">Best Sellers</h3>
+        <div class="arrivals-grids">
+            @foreach (var item in ViewBag.BestSellers)
+            {
+                <div class="col-md-3 arrival-grid simpleCart_shelfItem">
+                    <div class="grid-arr">
+                        <div class="grid-arrival">
+                            <figure>
+                                <a href="#" class="new-gri" data-toggle="modal" data-target="#myModal1">
+                                    <div class="grid-img">
+                                        <img src="~/images/@item.Image" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="grid-img">
+                                        <img src="~/images/@item.Image" class="img-responsive" alt="">
+                                    </div>
+                                </a>
+                            </figure>
                         </div>
-                    </div>
+                        <div class="ribben">
+                            <p>NEW</p>
+                        </div>
+                        <div class="ribben1">
+                            <p>SALE</p>
+                        </div>
+                        <div class="block">
+                            <div class="starbox small ghosting"> </div>
+                        </div>
+                        <div class="women">
+                            <h6><a href="~/pages/single/@item.ID">@item.TenSP</a></h6>
+                            <span class="size">@item.Size</span>
+                            <p><del>@item.Gia VND</del><em class="item_price">@item.GiaMoi VND</em></p>
+                            <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Add To Cart</a>
+                        </div>
 
-                }
-                <div class="clearfix"></div>
-            </div>
+                    </div>
+                </div>
+
+            }
+            <div class="clearfix"></div>
         </div>
+
     </div>
     <!--new-arrivals-->
 </div>

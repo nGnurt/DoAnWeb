@@ -5,6 +5,159 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<div id="successModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <i class="material-icons">&#xE876;</i>
+                </div>
+                <h4 class="modal-title w-100">Thêm Thành Công!</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" style="margin-left:90px;" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box" style="background:#b22222">
+                    <i class="material-icons">&#xE872;</i>
+                </div>
+                <h4 class="modal-title w-100">Xóa Thành Công!</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" style="margin-left:90px;background:#b22222" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="updateModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box" style="background:#3205cd">
+                    <i class="material-icons">&#xE86A;</i>
+                </div>
+                <h4 class="modal-title w-100">Cập Nhật Thành Công!</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" style="margin-left:90px;background:#3205cd" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm Chi Tiet Hoa Don</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="HoaDon_ID" class="control-label"></label>
+                        <select asp-for="HoaDon_ID" id="hoadon_id" class="form-control" asp-items="ViewBag.HoaDon"></select>
+                        @*<select asp-for="TenSP" id="tensp" class="form-control" asp-items="ViewBag.HoaDon"></select>*@
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TenSP" class="control-label"></label>
+                        @*<input id="tensp" asp-for="TenSP" class="form-control" />*@
+                        <select asp-for="TenSP" id="tensp" class="form-control" asp-items="ViewBag.SanPham"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SoLuong" class="control-label"></label>
+                        <input id="soluong" asp-for="SoLuong" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Gia" class="control-label"></label>
+                        @*<input id="gia" asp-for="Gia" class="form-control" />*@
+                        <select asp-for="Gia" id="gia" class="form-control" asp-items="ViewBag.SanPham1"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="KhuyenMai" class="control-label"></label>
+                        <input id="khuyenmai" asp-for="KhuyenMai" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.KhuyenMai)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ThanhTien" class="control-label"></label>
+                        <input asp-for="ThanhTien" id="thanhtien" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.ThanhTien)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TrangThai" class="control-label"></label>
+                        <input asp-for="TrangThai" id="trangthai" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.TrangThai)</span>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" name="btn_create_chitiethoadon" class="btn btn-primary">Thêm Mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sửa loại sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" id="edit_id" asp-for="ID" />
+                    <div class="form-group">
+                        <label asp-for="TenSP" class="control-label"></label>
+                        <input asp-for="TenSP" id="edit_tensp" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.TenSP)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SoLuong" class="control-label"></label>
+                        <input asp-for="SoLuong" id="edit_soluong" class="form-control" />
+                        <span asp-validation-for="SoLuong" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Gia" class="control-label"></label>
+                        <input asp-for="Gia" id="edit_gia" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Gia)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="KhuyenMai" class="control-label"></label>
+                        <input asp-for="KhuyenMai" id="edit_khuyenmai" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.KhuyenMai)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ThanhTien" class="control-label"></label>
+                        <input asp-for="ThanhTien" id="edit_thanhtien" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.ThanhTien)</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TrangThai" class="control-label"></label>
+                        <input asp-for="TrangThai" id="edit_trangthai" class="form-control" />
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.TrangThai)</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" name="btn_update_chitiethoadon" class="btn btn-primary">Cập Nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="wrapper">
     <div class="sidebar" data-image="../../admin/img/sidebar-5.jpg">
         <!--
@@ -144,19 +297,10 @@
                     <div class="col-md-4">
 
                         <p>
-                            <a asp-action="Create">Create New</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Thêm</button>
                         </p>
-                        <form asp-controller="ChiTietHoaDon" asp-action="Index" method="get">
 
 
-
-                            <p>
-                                ID Hóa Đơn: <input type="text" name="searchString"><button type="submit" class="btn-facebook">Tìm</button>
-
-
-
-                            </p>
-                        </form>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -210,9 +354,9 @@
                                         @item.TrangThai
                                     </td>
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                                        <button type="button" name="edit_chitiethoadon" data-idchitiethoadon="@item.ID" class="btn btn-primary" data-toggle="modal" data-target="#EditModal">Edit</button>
+                                        <button type="button" name="btn_delete_chitiethoadon" data-idchitiethoadon="@item.ID" class="btn btn-danger">Delete</button>
+
                                     </td>
                                 </tr>
                                 }
@@ -222,3 +366,114 @@
                 </div>
             </div>
         </div>
+        @section Scripts{
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            <script>
+                function addChiTietHoaDon() {
+                    var insert = {};
+                    insert.HoaDon_ID = parseInt($("#hoadon_id").val());
+                    insert.TenSP = $("#tensp").val();
+                    insert.SoLuong = $("#soluong").val();
+                    insert.Gia = $("#gia").val();
+                    insert.KhuyenMai = parseInt($("#khuyenmai").val())
+                    insert.ThanhTien = parseInt($("#thanhtien").val())
+                    insert.TrangThai = parseInt($("#trangthai").val())
+                    $.ajax({
+                        url: "../../api/ChiTietHoaDonApi/PostChiTietHoaDonModel",
+                        type: "POST",
+                        contentType: "Application/json;charset-utf-8",
+                        data: JSON.stringify(insert),
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        $("#AddModal").modal('hide');
+                        $("#successModal").modal('show');
+
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                function getChiTietHoaDon(id) {
+                    $.ajax({
+                        url: "../../api/ChiTietHoaDonApi/GetChiTietHoaDonModel/" + id,
+                        type: "GET",
+                        contentType: "Application/json;charset-utf-8",
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        $("#edit_id").val(reponse.id);
+                        $("#edit_tensp").val(reponse.tenSP);
+                        $("#edit_soluong").val(reponse.soLuong);
+                        $("#edit_gia").val(reponse.gia);
+                        $("#edit_khuyenmai").val(reponse.khuyenMai);
+                        $("#edit_thanhtien").val(reponse.thanhTien);
+                        $("#edit_trangthai").val(reponse.trangThai);
+
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                function updateChiTietHoaDon(id) {
+                    var update = {}
+                    update.HoaDon_ID = parseInt(id);
+                    update.ID = parseInt(id);
+                    update.TenSP = $("#edit_tensp").val();
+                    update.SoLuong = $("#edit_soluong").val();
+                    update.Gia = $("#edit_gia").val();
+                    update.KhuyenMai = parseInt($("#edit_khuyenmai").val());
+                    update.ThanhTien = parseInt($("#edit_thanhtien").val());
+                    update.TrangThai = parseInt($("#edit_trangthai").val());
+                    $.ajax({
+                        url: "../../api/ChiTietHoaDonApi/PutChiTietHoaDonModel/" + id,
+                        type: "PUT",
+                        contentType: "Application/json;charset-utf-8",
+                        data: JSON.stringify(update),
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        $("#EditModal").modal('hide');
+                        $("#updateModal").modal('show');
+
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                function deleteChiTietHoaDon(id) {
+
+                    $.ajax({
+                        url: "../../api/ChiTietHoaDonApi/DeleteChiTietHoaDonModel/" + id,
+                        type: "DELETE",
+                        contentType: "Application/json;charset-utf-8",
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        $("#deleteModal").modal('show');
+
+
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                $(document).ready(function () {
+                    $('button[name=btn_create_chitiethoadon]').click(function (e) {
+                        addChiTietHoaDon();
+                        e.preventDefault();
+                    });
+                    $('button[name=edit_chitiethoadon]').click(function (e) {
+                        var id = $(this).data("idchitiethoadon");
+                        getChiTietHoaDon(id);
+                        e.preventDefault();
+                    });
+                    $('button[name=btn_update_chitiethoadon]').click(function (e) {
+                        var id = $("#edit_id").val();
+                        updateChiTietHoaDon(id);
+                        e.preventDefault();
+                    });
+                    $('button[name=btn_delete_chitiethoadon]').click(function (e) {
+                        var id = $(this).data("idchitiethoadon");
+                        deleteChiTietHoaDon(id);
+                        e.preventDefault();
+                    });
+                    $('button[name=btn_ok]').click(function (e) {
+                        location.reload();
+                    });
+                });
+
+            </script>
+        }
