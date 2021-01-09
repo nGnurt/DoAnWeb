@@ -90,6 +90,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
                 chitiethoaDonModel.HoaDon_ID = size;
                 _context.Add(chitiethoaDonModel);
                 await _context.SaveChangesAsync();
+                HttpContext.Session.Remove("cart");
                 return RedirectToAction(nameof(Index));
             }
             ViewData["User_ID"] = new SelectList(_context.Set<UserModel>(), "ID", "ID", hoaDonModel.User_ID);

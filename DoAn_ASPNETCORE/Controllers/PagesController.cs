@@ -230,13 +230,13 @@ namespace DoAn_ASPNETCORE.Controllers
             ViewData["address"] = address;
             ViewBag.cart = cart;
             ViewBag.size = cart.Count;
-            if (!string.IsNullOrEmpty(email))
-            {
-                // hãy tạo cấu trúc db lưu lại đơn hàng và xóa cart khỏi session
+            //if (!string.IsNullOrEmpty(email))
+            //{
+            //    // hãy tạo cấu trúc db lưu lại đơn hàng và xóa cart khỏi session
 
-                ClearCart();
-                RedirectToAction(nameof(Index));
-            }
+            //    ClearCart();
+            //    RedirectToAction(nameof(Index));
+            //}
 
             return View();
         }
