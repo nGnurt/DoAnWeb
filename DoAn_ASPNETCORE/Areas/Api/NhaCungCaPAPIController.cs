@@ -91,12 +91,13 @@ namespace DoAn_ASPNETCORE.Areas.Api
         public async Task<ActionResult<NhaCungCapModel>> DeleteNhaCungCapModel(int id)
         {
             var nhaCungCapModel = await _context.NhaCungCapModel.FindAsync(id);
+            nhaCungCapModel.TrangThai = "0";
             if (nhaCungCapModel == null)
             {
                 return NotFound();
             }
 
-            _context.NhaCungCapModel.Remove(nhaCungCapModel);
+            _context.NhaCungCapModel.Update(nhaCungCapModel);
             await _context.SaveChangesAsync();
 
             return nhaCungCapModel;

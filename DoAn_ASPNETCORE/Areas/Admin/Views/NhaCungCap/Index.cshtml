@@ -289,25 +289,8 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach (var item in ViewBag.DsNCC)
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.TenNCC
-                                        </td>
-                                        <td>
-                                            @item.DiaChi
-                                        </td>
-                                        <td>
-                                            @item.TrangThai
-                                        </td>
-                                        <td>
-                                            <button type="button" name="edit_nhacungcap" data-idnhacungcap="@item.ID" class="btn btn-primary" data-toggle="modal" data-target="#EditModal">Edit</button>
-                                            <button type="button" name="btn_delete_nhacungcap" data-idnhacungcap="@item.ID" class="btn btn-danger">Delete</button>
-                                        </td>
-                                    </tr>
-                                }
+                            <tbody id="dsncc">
+                             
                             </tbody>
                         </table>
                     </div>
@@ -318,25 +301,28 @@
         @section Scripts{
             @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
             <script>
-                function addNCC() {
-                    var insert = {};
-                    insert.TenNCC = $("#tenncc").val();
-                    insert.DiaChi = $("#diachi").val();
-                    insert.TrangThai = $("#trangthai").val();
+                window.onload = function () {
                     $.ajax({
-                        url: "../../api/NhaCungCapAPI/PostNhaCungCapModel",
-                        type: "POST",
+                        url: "../../api/NhaCungCapAPI/GetNhaCungCapModel",
+                        type: "GET",
                         contentType: "Application/json;charset-utf-8",
-                        data: JSON.stringify(insert),
-                        dataType: "json"
                     }).done(function (reponse) {
-                        $("#AddModal").modal('hide');
-                        $("#successModal").modal('show');
+                        console.log(reponse);
+                        var newHtml = "";
 
+                        $.each(reponse, function (index, nCC) {
+                            newHtml += '<tr><td>' + nCC.tenNCC + '</td>';
+                            newHtml += '<td>' + nCC.diaChi + '</td>';
+                            newHtml += '<td>' + nCC.trangThai + '</td>';
+                            newHtml += '<td>' + '<button type="button" id="edit_nhacungcap" data-idnhacungcap="' + nCC.id + '" class="btn btn-primary" data-toggle="modal" data-target="#EditModal">Edit</button>';
+                            newHtml += '<button type="button" id="btn_delete_nhacungcap" data-idnhacungcap="' + nCC.id + '" class="btn btn-danger">Delete</button>' + '</td></tr>';
+                        });
+                        $("#dsncc").html(newHtml);
                     }).fail(function () {
                         alert('Thất bại !');
                     });
                 }
+
                 function getNCC(id) {
                     $.ajax({
                         url: "../../api/NhaCungCapAPI/GetNhaCungCapModel/" + id,
@@ -353,11 +339,31 @@
                         alert('Thất bại !');
                     });
                 }
-                function updateNCC(id) {
+
+                function addNCC() {
+                    var insert = {};
+                    insert.TenNCC = $("#tencc").val();
+                    insert.DiaChi = parseInt($("#diachi").val());
+                    insert.TrangThai = $("#trangthai").val();
+                    $.ajax({
+                        url: "../../api/NhaCungCapAPI/PostNhaCungCapModel",
+                        type: "POST",
+                        contentType: "Application/json;charset-utf-8",
+                        data: JSON.stringify(insert),
+                        dataType: "json"
+                    }).done(function (reponse) {
+                        $("#AddModal").modal('hide');
+                        $("#successModal").modal('show');
+
+                    }).fail(function () {
+                        alert('Thất bại !');
+                    });
+                }
+                function upDateNCC(id) {
                     var update = {}
                     update.ID = parseInt(id);
                     update.TenNCC = $("#edit_tenncc").val();
-                    update.DiaChi = ($("#edit_diachi").val());
+                    update.DiaChi =($("#edit_diachi").val());
                     update.TrangThai = $("#edit_trangthai").val();
                     $.ajax({
                         url: "../../api/NhaCungCapAPI/PutNhaCungCapModel/" + id,
@@ -373,7 +379,8 @@
                         alert('Thất bại !');
                     });
                 }
-                function deleteNhaCungCap(id) {
+
+                function deleteNCC(id) {
 
                     $.ajax({
                         url: "../../api/NhaCungCapAPI/DeleteNhaCungCapModel/" + id,
@@ -383,33 +390,56 @@
                     }).done(function (reponse) {
                         $("#deleteModal").modal('show');
 
+
                     }).fail(function () {
                         alert('Thất bại !');
                     });
                 }
+
                 $(document).ready(function () {
                     $('button[name=btn_create_nhacungcap]').click(function (e) {
                         addNCC();
                         e.preventDefault();
                     });
-                    $('button[name=edit_nhacungcap]').click(function (e) {
+
+                    //$('button[name=edit_loaisanpham]').click(function (e) {
+                    //    console.log("OK")
+                    //var id = $(this).data("idloaisp");
+                    //getLoaiSP(id);
+                    //e.preventDefault();
+                    //});
+
+                    /* [https://api.jquery.com/on/]
+                      Liên kết sự kiện bị phá vỡ khi thực hiện ajax cập nhật đoạn html trước khi load page. 
+                      Vì vậy để load trước dsanh, bắt sự kiện tại đoạn html cập nhật thì nên dùng .on() để liên kết sự kiện*/
+
+                    $('body').on('click', '#edit_nhacungcap', function () {
                         var id = $(this).data("idnhacungcap");
+                
                         getNCC(id);
+                        e.preventDefault();
+                    });
+                    $('body').on('click', '#btn_delete_nhacungcap', function () {
+                        var id = $(this).data("idnhacungcap");
+                        deleteNCC(id);
                         e.preventDefault();
                     });
                     $('button[name=btn_update_nhacungcap]').click(function (e) {
                         var id = $("#edit_id").val();
-                        updateNCC(id);
+                        upDateNCC(id);
                         e.preventDefault();
                     });
-                    $('button[name=btn_delete_nhacungcap]').click(function (e) {
-                        var id = $(this).data("idnhacungcap");
-                        deleteNhaCungCap(id);
-                        e.preventDefault();
-                    });
+
+                    //$('button[name=btn_delete_loaisanpham]').click(function (e) {
+                    //var id = $(this).data("idloaisp");
+                    //deleteLoaiSP(id);
+                    //e.preventDefault();
+                    //});
+
                     $('button[name=btn_ok]').click(function (e) {
                         location.reload();
                     });
+
                 });
 
             </script>

@@ -43,10 +43,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-          
-            var nhacungcaps = from m in _context.NhaCungCapModel
-                              select m;
-            ViewBag.DsNCC = nhacungcaps;
+
             return View();
         }
 
