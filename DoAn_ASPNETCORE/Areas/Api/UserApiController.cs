@@ -10,7 +10,7 @@ using DoAn_ASPNETCORE.Areas.Admin.Models;
 
 namespace DoAn_ASPNETCORE.Areas.Api
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserApiController : ControllerBase
     {
@@ -91,12 +91,13 @@ namespace DoAn_ASPNETCORE.Areas.Api
         public async Task<ActionResult<UserModel>> DeleteUserModel(int id)
         {
             var userModel = await _context.UserModel.FindAsync(id);
+            userModel.TrangThai = "0";
             if (userModel == null)
             {
                 return NotFound();
             }
 
-            _context.UserModel.Remove(userModel);
+            _context.UserModel.Update(userModel);
             await _context.SaveChangesAsync();
 
             return userModel;
