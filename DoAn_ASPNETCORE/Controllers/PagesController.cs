@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using DoAn_ASPNETCORE.Areas.Admin.Models;
 using Newtonsoft.Json;
+using PusherServer;
 
 namespace DoAn_ASPNETCORE.Controllers
 {
@@ -25,7 +26,34 @@ namespace DoAn_ASPNETCORE.Controllers
         }
         public async Task<IActionResult> Index()
         {
+
             ViewBag.Username = HttpContext.Session.GetString("username");
+
+            var visitors = 0;
+            if (System.IO.File.Exists("visitors.txt"))
+            {
+                string noOfVisitors = System.IO.File.ReadAllText("visitors.txt");
+                visitors = Int32.Parse(noOfVisitors);
+            }
+            ++visitors;
+            var visit_text = (visitors == 1) ? " view" : " views";
+            System.IO.File.WriteAllText("visitors.txt", visitors.ToString());
+
+            ViewData["visitors"] = visitors;
+            ViewData["visitors_txt"] = visit_text;
+            var options = new PusherOptions();
+            options.Cluster = "PUSHER_APP_CLUSTER";
+
+            var pusher = new Pusher(
+            "PUSHER_APP_ID",
+            "PUSHER_APP_KEY",
+            "PUSHER_APP_SECRET", options);
+
+            pusher.TriggerAsync(
+            "general",
+            "newVisit",
+            new { visits = visitors.ToString(), message = visit_text });
+
             return View();
         }
 
@@ -88,6 +116,30 @@ namespace DoAn_ASPNETCORE.Controllers
         }
         public IActionResult Single(int? id)
         {
+            var visitors = 0;
+            if (System.IO.File.Exists("visitors.txt"))
+            {
+                string noOfVisitors = System.IO.File.ReadAllText("visitors.txt");
+                visitors = Int32.Parse(noOfVisitors);
+            }
+            ++visitors;
+            var visit_text = (visitors == 1) ? " view" : " views";
+            System.IO.File.WriteAllText("visitors.txt", visitors.ToString());
+
+            ViewData["visitors"] = visitors;
+            ViewData["visitors_txt"] = visit_text;
+            var options = new PusherOptions();
+            options.Cluster = "PUSHER_APP_CLUSTER";
+
+            var pusher = new Pusher(
+            "PUSHER_APP_ID",
+            "PUSHER_APP_KEY",
+            "PUSHER_APP_SECRET", options);
+
+            pusher.TriggerAsync(
+            "general",
+            "newVisit",
+            new { visits = visitors.ToString(), message = visit_text });
             ViewBag.Username = HttpContext.Session.GetString("username");
            
             var sanpham = (from m in _context.SanPhamModel
@@ -107,12 +159,12 @@ namespace DoAn_ASPNETCORE.Controllers
         }
 
 
-        public async Task<IActionResult>search(String search)
+        public async Task<IActionResult> search(String search)
         {
             ViewData["getSearch"] = search;
             var sch = from x in _context.SanPhamModel select x;
-          
-            if(! String.IsNullOrEmpty(search))
+
+            if (!String.IsNullOrEmpty(search))
             {
                 sch = sch.Where(x => x.TenSP.Contains(search));
             }
@@ -177,7 +229,7 @@ namespace DoAn_ASPNETCORE.Controllers
             // Lưu cart vào Session
             SaveCartSession(cart);
             // Chuyển đến trang hiện thị Cart
-            return RedirectToAction(nameof(Cart));      
+            return RedirectToAction(nameof(Cart));
 
         }
 
@@ -251,7 +303,7 @@ namespace DoAn_ASPNETCORE.Controllers
         public async Task<IActionResult> DatHang([Bind("ID,User_ID,HoTen,Sdt,ThanhTien,TrangThai")] HoaDonModel hoaDonModel, [Bind("ID,HoaDon_ID,TenSP,SoLuong,Gia,KhuyenMai,ThanhTien,TrangThai")] ChiTietHoaDonModel chitiethoaDonModel)
         {
             var HoaDon = from m in _context.HoaDonModel
-                             select m;
+                         select m;
             int size = HoaDon.Count();
             if (ModelState.IsValid)
             {
@@ -265,7 +317,7 @@ namespace DoAn_ASPNETCORE.Controllers
             return RedirectToAction(nameof(CheckOut));
         }
 
-
-
+      
     }
+
 }
