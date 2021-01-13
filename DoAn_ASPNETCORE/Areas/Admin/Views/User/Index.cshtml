@@ -10,20 +10,20 @@
     </script>
 }
 @*<div id="successModal" class="modal fade">
-    <div class="modal-dialog modal-confirm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="icon-box">
-                    <i class="material-icons">&#xE876;</i>
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE876;</i>
+                    </div>
+                    <h4 class="modal-title w-100">Thêm Thành Công!</h4>
                 </div>
-                <h4 class="modal-title w-100">Thêm Thành Công!</h4>
-            </div>
-            <div class="modal-footer">
-                <button type="button" style="margin-left:90px;" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+                <div class="modal-footer">
+                    <button type="button" style="margin-left:90px;" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 <div id="deleteModal" class="modal fade">
     <div class="modal-dialog modal-confirm">
         <div class="modal-content">
@@ -55,66 +55,66 @@
     </div>
 </div>
 @*<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="UserName" class="control-label"></label>
-                        <input id="username" asp-for="UserName" class="form-control" />
-                        <span class="text-danger">@Html.ValidationMessageFor(model => model.UserName)</span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input id="password" asp-for="Password" class="form-control" />
-                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Password)</span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="HoTen" class="control-label"></label>
-                        <input id="hoten" asp-for="HoTen" class="form-control" />
-                        <span class="text-danger">@Html.ValidationMessageFor(model => model.HoTen)</span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="DiaChi" class="control-label"></label>
-                        <input id="diachi" asp-for="DiaChi" class="form-control" />
-                        <span class="text-danger">@Html.ValidationMessageFor(model => model.DiaChi)</span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input id="email" asp-for="Email" class="form-control" />
-                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Email)</span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Sdt" class="control-label"></label>
-                        <input id="sdt" asp-for="Sdt" class="form-control" />
-                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Sdt)</span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Loai" class="control-label"></label>
-                        <input id="loai" asp-for="Loai" class="form-control" />
-                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Loai)</span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="TrangThai" class="control-label"></label>
-                        <input id="trangthai" asp-for="TrangThai" class="form-control" />
-                        <span class="text-danger">@Html.ValidationMessageFor(model => model.TrangThai)</span>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" name="btn_create_user" class="btn btn-primary">Thêm Mới</button>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="UserName" class="control-label"></label>
+                            <input id="username" asp-for="UserName" class="form-control" />
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.UserName)</span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input id="password" asp-for="Password" class="form-control" />
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.Password)</span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HoTen" class="control-label"></label>
+                            <input id="hoten" asp-for="HoTen" class="form-control" />
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.HoTen)</span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DiaChi" class="control-label"></label>
+                            <input id="diachi" asp-for="DiaChi" class="form-control" />
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.DiaChi)</span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input id="email" asp-for="Email" class="form-control" />
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.Email)</span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Sdt" class="control-label"></label>
+                            <input id="sdt" asp-for="Sdt" class="form-control" />
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.Sdt)</span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Loai" class="control-label"></label>
+                            <input id="loai" asp-for="Loai" class="form-control" />
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.Loai)</span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TrangThai" class="control-label"></label>
+                            <input id="trangthai" asp-for="TrangThai" class="form-control" />
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.TrangThai)</span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" name="btn_create_user" class="btn btn-primary">Thêm Mới</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -130,49 +130,49 @@
                     <input type="hidden" id="edit_id" asp-for="ID" />
                     <div class="form-group">
                         <label asp-for="UserName" class="control-label"></label>
-                        <input id="username" asp-for="UserName" class="form-control" />
+                        <input id="edit_username" asp-for="UserName" class="form-control" />
                         <span class="text-danger">@Html.ValidationMessageFor(model => model.UserName)</span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Password" class="control-label"></label>
-                        <input id="password" asp-for="Password" class="form-control" />
+                        <input id="edit_password" asp-for="Password" class="form-control" />
                         <span class="text-danger">@Html.ValidationMessageFor(model => model.Password)</span>
                     </div>
                     <div class="form-group">
                         <label asp-for="HoTen" class="control-label"></label>
-                        <input id="hoten" asp-for="HoTen" class="form-control" />
+                        <input id="edit_hoten" asp-for="HoTen" class="form-control" />
                         <span class="text-danger">@Html.ValidationMessageFor(model => model.HoTen)</span>
                     </div>
                     <div class="form-group">
                         <label asp-for="DiaChi" class="control-label"></label>
-                        <input id="diachi" asp-for="DiaChi" class="form-control" />
+                        <input id="edit_diachi" asp-for="DiaChi" class="form-control" />
                         <span class="text-danger">@Html.ValidationMessageFor(model => model.DiaChi)</span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Email" class="control-label"></label>
-                        <input id="email" asp-for="Email" class="form-control" />
+                        <input id="edit_email" asp-for="Email" class="form-control" />
                         <span class="text-danger">@Html.ValidationMessageFor(model => model.Email)</span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Sdt" class="control-label"></label>
-                        <input id="sdt" asp-for="Sdt" class="form-control" />
+                        <input id="edit_sdt" asp-for="Sdt" class="form-control" />
                         <span class="text-danger">@Html.ValidationMessageFor(model => model.Sdt)</span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Loai" class="control-label"></label>
-                        <input id="loai" asp-for="Loai" class="form-control" />
+                        <input id="edit_loai" asp-for="Loai" class="form-control" />
                         <span class="text-danger">@Html.ValidationMessageFor(model => model.Loai)</span>
                     </div>
                     <div class="form-group">
                         <label asp-for="TrangThai" class="control-label"></label>
-                        <input id="trangthai" asp-for="TrangThai" class="form-control" />
+                        <input id="edit_trangthai" asp-for="TrangThai" class="form-control" />
                         <span class="text-danger">@Html.ValidationMessageFor(model => model.TrangThai)</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" name="btn_update_user" class="btn btn-primary">Cập Nhật</button>
+                <button type="button" id="btn_update_user" class="btn btn-primary">Cập Nhật</button>
             </div>
         </div>
     </div>
@@ -316,8 +316,8 @@
                     <div class="col-md-4">
 
                         @*<p>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Thêm</button>
-                        </p>*@
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Thêm</button>
+                            </p>*@
                         @*<form asp-controller="User" asp-action="Index" method="get">
                                 <p>
 
@@ -374,7 +374,7 @@
                         var newHtml = "";
                         $.each(reponse, function (index, User) {
                             newHtml += '<tr><td>' + User.userName + '</td>';
-                            newHtml += '<td>' + User.passWord + '</td>';
+                            newHtml += '<td>' + User.password + '</td>';
                             newHtml += '<td>' + User.hoTen + '</td>';
                             newHtml += '<td>' + User.diaChi + '</td>';
                             newHtml += '<td>' + User.email + '</td>';
@@ -391,7 +391,7 @@
                         alert('Thất bại !');
                     });
 
-        }
+                }
                 function addUser() {
                     var insert = {};
                     insert.UserName = $("#username").val();
@@ -432,14 +432,14 @@
                         dataType: "json"
                     }).done(function (reponse) {
                         $("#edit_id").val(reponse.id);
-                        $("#edit_username").val(reponse.UserName);
-                        $("#edit_password").val(reponse.Password);
-                        $("#edit_hoten").val(reponse.HoTen);
-                        $("#edit_diachi").val(reponse.DiaChi);
-                        $("#edit_email").val(reponse.Email);
-                        $("#edit_sdt").val(reponse.Sdt);
-                        $("#edit_loai").val(reponse.Loai);
-                        $("#edit_trangthai").val(reponse.TrangThai);
+                        $("#edit_username").val(reponse.userName);
+                        $("#edit_password").val(reponse.password);
+                        $("#edit_hoten").val(reponse.hoTen);
+                        $("#edit_diachi").val(reponse.diaChi);
+                        $("#edit_email").val(reponse.email);
+                        $("#edit_sdt").val(reponse.sdt);
+                        $("#edit_loai").val(reponse.loai);
+                        $("#edit_trangthai").val(reponse.trangThai);
                     }).fail(function () {
                         alert('Thất bại !');
                     });
@@ -447,21 +447,21 @@
                 function updateUser(id) {
                     var update = {}
                     update.ID = parseInt(id);
-                    update.UserName = $("#username").val();
+                    update.UserName = $("#edit_username").val();
 
-                    update.Password = $("#password").val();
+                    update.Password = $("#edit_password").val();
 
-                    update.HoTen = $("#hoten").val();
+                    update.HoTen = $("#edit_hoten").val();
 
-                    update.DiaChi = $("#diachi").val();
+                    update.DiaChi = $("#edit_diachi").val();
 
-                    update.Email = $("#email").val();
+                    update.Email = $("#edit_email").val();
 
-                    update.Sdt = $("#sdt").val();
+                    update.Sdt = $("#edit_sdt").val();
 
-                    update.Loai = $("#loai").val();
+                    update.Loai = $("#edit_loai").val();
 
-                    update.TrangThai = $("#trangthai").val();
+                    update.TrangThai = $("#edit_trangthai").val();
                     $.ajax({
                         url: "../../api/UserApi/PutUserModel/" + id,
                         type: "PUT",
@@ -495,17 +495,17 @@
                         addUser();
                         e.preventDefault();
                     });
-                    $('body').on('click','#edit_user',function () {
+                    $('body').on('click', '#edit_user', function () {
                         var id = $(this).data("iduser");
                         getUser(id);
                         e.preventDefault();
                     });
-                    $('button[name=btn_update_user]').click(function (e) {
+                    $('body').on('click', '#btn_update_user', function () {
                         var id = $("#edit_id").val();
                         updateUser(id);
                         e.preventDefault();
                     });
-                    $('body').on('click','#btn_delete_user',function () {
+                    $('body').on('click', '#btn_delete_user', function () {
                         var id = $(this).data("iduser");
                         deleteUser(id);
                         e.preventDefault();
