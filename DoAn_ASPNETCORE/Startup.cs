@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DoAn_ASPNETCORE.Areas.Admin.Data;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using static DoAn_ASPNETCORE.Controllers.PagesController;
 
 namespace DoAn_ASPNETCORE
 {
@@ -24,11 +27,16 @@ namespace DoAn_ASPNETCORE
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDistributedMemoryCache();
+
+            services.Configure<ForwardedHeadersOptions>(options => options.ForwardedHeaders =
+            ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto);
+
+
             services.AddControllersWithViews();
             services.AddDbContext<Webbanhang>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("Webbanhang")));
-
             services.AddAntiforgery(o => o.HeaderName = "CSRF-TOKEN");
             services.AddDistributedMemoryCache();           // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
             services.AddSession(options =>
@@ -37,6 +45,7 @@ namespace DoAn_ASPNETCORE
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,8 +78,10 @@ namespace DoAn_ASPNETCORE
                 endpoints.MapControllerRoute(
                  name: "default",
                  pattern: "{controller=Pages}/{action=Index}/{id?}");
+
             });
             
         }
+
     }
 }
