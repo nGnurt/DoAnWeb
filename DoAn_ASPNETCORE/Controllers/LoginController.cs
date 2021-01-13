@@ -29,6 +29,7 @@ namespace DoAn_ASPNETCORE.Controllers
 
             if (r.Count == 0)
             {
+
                 return View("Index");
             }
             //var str = JsonConvert.SerializeObject(member);
@@ -42,6 +43,7 @@ namespace DoAn_ASPNETCORE.Controllers
         }
         public IActionResult Index()
         {
+            ViewBag.Username = HttpContext.Session.GetString("username");
             return View();
         }
         [HttpPost]
