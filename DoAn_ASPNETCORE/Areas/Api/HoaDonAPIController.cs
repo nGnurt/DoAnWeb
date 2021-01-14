@@ -92,12 +92,13 @@ namespace DoAn_ASPNETCORE.Areas.Api
         public async Task<ActionResult<HoaDonModel>> DeleteHoaDonModel(int id)
         {
             var hoaDonModel = await _context.HoaDonModel.FindAsync(id);
+            hoaDonModel.TrangThai = "0";
             if (hoaDonModel == null)
             {
                 return NotFound();
             }
 
-            _context.HoaDonModel.Remove(hoaDonModel);
+            _context.HoaDonModel.Update(hoaDonModel);
             await _context.SaveChangesAsync();
 
             return hoaDonModel;
