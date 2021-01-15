@@ -6,7 +6,7 @@
 
 @model List<DoAn_ASPNETCORE.Areas.Admin.Models.ItemModel>
 
-<h2>GIỎ HÀNG</h2>
+<h2><center>CART</center></h2>
 
 @if (Model.Count > 0)
 {
@@ -17,7 +17,7 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Iamge</th>
+            <th>Image</th>
             <th>Price</th>
             <th>Quantity</th>
             <th>Total</th>
@@ -38,10 +38,10 @@
                 <td>
                     <button class="btn btn-success updatecartitem"
                             data-productid="@cartitem.SanPham.ID">
-                        Cập nhật
+Update
                     </button>
                     <a asp-route="removecart" asp-route-productid="@cartitem.SanPham.ID"
-                       class="btn btn-danger">Xóa</a>
+                       class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
@@ -76,5 +76,7 @@
 }
 else
 {
-    <p class="alert alert-danger">Giỏ hàng trống</p>
+<p class="alert alert-danger">
+    Your cart is empty
+</p>
 }
