@@ -154,7 +154,7 @@ namespace DoAn_ASPNETCORE.Controllers
                             where l.DanhMuc == "DM3"
                             select l).Take(4).ToList();
             ViewBag.BestSellers = BetsSell;
-
+            ViewBag.id = id;
             return View();
         }
 
