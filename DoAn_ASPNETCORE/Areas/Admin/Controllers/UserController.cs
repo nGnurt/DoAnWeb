@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAn_ASPNETCORE.Areas.Admin.Data;
 using DoAn_ASPNETCORE.Areas.Admin.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
 {
@@ -91,6 +93,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                userModel.Password = CreateMd5(userModel.Password);
                 _context.Add(userModel);
                 await _context.SaveChangesAsync();
                 var url = Url.RouteUrl("", new { Controller = "Pages", action = "Index", area = "" });
@@ -99,6 +102,19 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
             return View(userModel);
         }
 
+        public static string CreateMd5(string input)
+        {
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            byte[] hasBytes = md5.ComputeHash(inputBytes);
+
+            StringBuilder sb = new StringBuilder();
+            for(int i=0;i<hasBytes.Length;i++)
+            {
+                sb.Append(hasBytes[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
         // GET: Admin/User/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

@@ -4,6 +4,10 @@
 @{
 }
 @model DoAn_ASPNETCORE.Areas.Admin.Models.HoaDonModel
+@{
+    ViewData["Title"] = "pages Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <!--banner-->
 <div id="successModal" class="modal fade">
     <div class="modal-dialog modal-confirm">
@@ -65,7 +69,7 @@
                         {
                             TenSP += @item.SanPham.TenSP + "/";
                             sl += @item.Quantity + "/";
-                            gia += @item.SanPham.GiaMoi+ "/";
+                            gia += @item.SanPham.GiaMoi + "/";
                         }
 
                         <tr>
@@ -114,7 +118,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="User_ID" class="control-label"></label>
-                        <input asp-for="User_ID" value="1" class="form-control" />
+                        <input asp-for="User_ID" value="@ViewBag.id" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label asp-for="HoTen" class="control-label"></label>
@@ -145,9 +149,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                
+
             </div>
-           
+
         </div>
     </div>
 </div>

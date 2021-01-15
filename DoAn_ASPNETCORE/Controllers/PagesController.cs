@@ -28,7 +28,7 @@ namespace DoAn_ASPNETCORE.Controllers
         {
 
             ViewBag.Username = HttpContext.Session.GetString("username");
-
+            
             var visitors = 0;
             if (System.IO.File.Exists("visitors.txt"))
             {
@@ -163,7 +163,7 @@ namespace DoAn_ASPNETCORE.Controllers
         {
             ViewData["getSearch"] = search;
             var sch = from x in _context.SanPhamModel select x;
-
+            ViewBag.Username = HttpContext.Session.GetString("username");
             if (!String.IsNullOrEmpty(search))
             {
                 sch = sch.Where(x => x.TenSP.Contains(search));
@@ -237,6 +237,7 @@ namespace DoAn_ASPNETCORE.Controllers
         [Route("/cart", Name = "cart")]
         public IActionResult Cart()
         {
+            ViewBag.Username = HttpContext.Session.GetString("username");
             return View(GetCartItems());
         }
 
@@ -281,13 +282,18 @@ namespace DoAn_ASPNETCORE.Controllers
         [Route("/checkout")]
         public IActionResult CheckOut([FromForm] string email, [FromForm] string address)
         {
-
+            ViewBag.Username = HttpContext.Session.GetString("username");
             // Xử lý khi đặt hàng
             var cart = GetCartItems();
             ViewData["email"] = email;
             ViewData["address"] = address;
             ViewBag.cart = cart;
             ViewBag.size = cart.Count;
+            if (HttpContext.Session.GetInt32("id") != null)
+            {
+                ViewBag.id = HttpContext.Session.GetInt32("id");
+            }
+            else return Redirect(Url.RouteUrl(new { area = "", controller = "Login", action = "Index" }));
             //if (!string.IsNullOrEmpty(email))
             //{
             //    // hãy tạo cấu trúc db lưu lại đơn hàng và xóa cart khỏi session
@@ -298,24 +304,7 @@ namespace DoAn_ASPNETCORE.Controllers
 
             return View();
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DatHang([Bind("ID,User_ID,HoTen,Sdt,ThanhTien,TrangThai")] HoaDonModel hoaDonModel, [Bind("ID,HoaDon_ID,TenSP,SoLuong,Gia,KhuyenMai,ThanhTien,TrangThai")] ChiTietHoaDonModel chitiethoaDonModel)
-        {
-            var HoaDon = from m in _context.HoaDonModel
-                         select m;
-            int size = HoaDon.Count();
-            if (ModelState.IsValid)
-            {
-                _context.Add(hoaDonModel);
-                chitiethoaDonModel.HoaDon_ID = size++;
-                _context.Add(chitiethoaDonModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-
-            return RedirectToAction(nameof(CheckOut));
-        }
+       
 
       
     }
