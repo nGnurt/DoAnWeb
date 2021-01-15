@@ -289,7 +289,11 @@ namespace DoAn_ASPNETCORE.Controllers
             ViewData["address"] = address;
             ViewBag.cart = cart;
             ViewBag.size = cart.Count;
-            ViewBag.id = HttpContext.Session.GetInt32("id");
+            if (HttpContext.Session.GetInt32("id") != null)
+            {
+                ViewBag.id = HttpContext.Session.GetInt32("id");
+            }
+            else return Redirect(Url.RouteUrl(new { area = "", controller = "Login", action = "Index" }));
             //if (!string.IsNullOrEmpty(email))
             //{
             //    // hãy tạo cấu trúc db lưu lại đơn hàng và xóa cart khỏi session
