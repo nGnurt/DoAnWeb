@@ -88,8 +88,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         }
 
         // POST: Admin/BinhLuan/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,User_ID,SanPham_ID,NoiDung,NgayDang,TrangThai")] BinhLuanModel binhLuanModel)

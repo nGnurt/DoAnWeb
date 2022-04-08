@@ -9,21 +9,6 @@
 
     </script>
 }
-@*<div id="successModal" class="modal fade">
-        <div class="modal-dialog modal-confirm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="icon-box">
-                        <i class="material-icons">&#xE876;</i>
-                    </div>
-                    <h4 class="modal-title w-100">Thêm Thành Công!</h4>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" style="margin-left:90px;" name="btn_ok" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>*@
 <div id="deleteModal" class="modal fade">
     <div class="modal-dialog modal-confirm">
         <div class="modal-content">
@@ -54,67 +39,6 @@
         </div>
     </div>
 </div>
-@*<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Thêm User</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="UserName" class="control-label"></label>
-                            <input id="username" asp-for="UserName" class="form-control" />
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.UserName)</span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Password" class="control-label"></label>
-                            <input id="password" asp-for="Password" class="form-control" />
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.Password)</span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="HoTen" class="control-label"></label>
-                            <input id="hoten" asp-for="HoTen" class="form-control" />
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.HoTen)</span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="DiaChi" class="control-label"></label>
-                            <input id="diachi" asp-for="DiaChi" class="form-control" />
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.DiaChi)</span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Email" class="control-label"></label>
-                            <input id="email" asp-for="Email" class="form-control" />
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.Email)</span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Sdt" class="control-label"></label>
-                            <input id="sdt" asp-for="Sdt" class="form-control" />
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.Sdt)</span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Loai" class="control-label"></label>
-                            <input id="loai" asp-for="Loai" class="form-control" />
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.Loai)</span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="TrangThai" class="control-label"></label>
-                            <input id="trangthai" asp-for="TrangThai" class="form-control" />
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.TrangThai)</span>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="button" name="btn_create_user" class="btn btn-primary">Thêm Mới</button>
-                </div>
-            </div>
-        </div>
-    </div>*@
 <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

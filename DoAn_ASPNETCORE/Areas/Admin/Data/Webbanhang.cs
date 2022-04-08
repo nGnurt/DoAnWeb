@@ -14,13 +14,13 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Data
         {
 
         }
-        public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.SanPhamModel> SanPhamModel { get; set; }
-        public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.LoaiSanPhamModel> LoaiSanPhamModel { get; set; }
-        public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.HoaDonModel> HoaDonModel { get; set; }
-        public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.ChiTietHoaDonModel> ChiTietHoaDonModel { get; set; }
-        public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.UserModel> UserModel { get; set; }
-        public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.NhaCungCapModel> NhaCungCapModel { get; set; }
-        public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.DanhMucModel> DanhMucModel { get; set; }
-        public DbSet<DoAn_ASPNETCORE.Areas.Admin.Models.BinhLuanModel> BinhLuanModel { get; set; }
+        public DbSet<SanPhamModel> SanPhamModel { get; set; }
+        public DbSet<LoaiSanPhamModel> LoaiSanPhamModel { get; set; }
+        public DbSet<HoaDonModel> HoaDonModel { get; set; }
+        public DbSet<ChiTietHoaDonModel> ChiTietHoaDonModel { get; set; }
+        public DbSet<UserModel> UserModel { get; set; }
+        public DbSet<NhaCungCapModel> NhaCungCapModel { get; set; }
+        public DbSet<DanhMucModel> DanhMucModel { get; set; }
+        public DbSet<BinhLuanModel> BinhLuanModel { get; set; }
     }
 }

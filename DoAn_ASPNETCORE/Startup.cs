@@ -41,6 +41,7 @@ namespace DoAn_ASPNETCORE
             services.AddDistributedMemoryCache();           // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
             services.AddSession(options =>
             {
+                //thời gian session
                 options.IdleTimeout = TimeSpan.FromSeconds(30000);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;

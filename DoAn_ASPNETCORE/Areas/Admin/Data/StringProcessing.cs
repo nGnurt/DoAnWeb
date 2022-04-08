@@ -12,7 +12,9 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Data
         public static string CreateMD5Hash(string input)
         {
             MD5 md5 = System.Security.Cryptography.MD5.Create();
+            //chuyển thành mã asscii
             byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            //băm ra kiểu byte
             byte[] hasBytes = md5.ComputeHash(inputBytes);
 
             StringBuilder sb = new StringBuilder();

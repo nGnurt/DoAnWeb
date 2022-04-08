@@ -46,12 +46,18 @@
                     <div class="key">
                         <i class="fa fa-lock" aria-hidden="true"></i>
                         <input type="text" name="Sdt" asp-for="Sdt" placeholder="Số điện thoại">
-                        <input type="hidden" value="1" asp-for="Loai">
+                        <div class="clearfix"></div>
+                    </div>
+                    <p>Chọn loại tài khoản</p>
+                    <div class="key">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        <input type="radio" value="0" asp-for="Loai" id="0"> Admin
+                        <t></t>
+                        <input type="radio" value="1" asp-for="Loai" id="1"> User
                         <input type="hidden" value="1" asp-for="TrangThai">
                         <div class="clearfix"></div>
                     </div>
-
-
+                    <br>
                     <input type="submit" value="Submit">
                 </form>
             </div>

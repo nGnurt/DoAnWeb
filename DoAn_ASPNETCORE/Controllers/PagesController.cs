@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-
 using DoAn_ASPNETCORE.Areas.Admin.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
@@ -24,7 +23,7 @@ namespace DoAn_ASPNETCORE.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
 
             ViewBag.Username = HttpContext.Session.GetString("username");
@@ -49,7 +48,7 @@ namespace DoAn_ASPNETCORE.Controllers
             "PUSHER_APP_KEY",
             "PUSHER_APP_SECRET", options);
 
-            pusher.TriggerAsync(
+             pusher.TriggerAsync(
             "general",
             "newVisit",
             new { visits = visitors.ToString(), message = visit_text });
@@ -57,7 +56,7 @@ namespace DoAn_ASPNETCORE.Controllers
             return View();
         }
 
-        public async Task<IActionResult> products(int? id)
+        public IActionResult products(int? id)
         {
             var iphone = (from m in _context.SanPhamModel
                           where m.MaLoai == id
@@ -70,10 +69,10 @@ namespace DoAn_ASPNETCORE.Controllers
             return View();
         }
 
-        public async Task<IActionResult> detail(int? id)
+        public IActionResult detail(int? id)
         {
 
-            var detail = (from m in _context.SanPhamModel
+            var detail =  (from m in _context.SanPhamModel
                           where m.ID == id
                           select m).ToList();
 
@@ -90,20 +89,13 @@ namespace DoAn_ASPNETCORE.Controllers
         }
         public IActionResult Products1(int? id)
         {
-            //var DsLaptop = (from m in _context.SanPhamModel
-            //                where m.MaLoai == id
-            //                select m).ToList();
-            //ViewBag.LapTop = DsLaptop;
+           
             ViewBag.id = id;
             ViewBag.Username = HttpContext.Session.GetString("username");
            
             return View();
         }
-        //public IActionResult Login()
-        //{
-        //    ViewBag.Username = HttpContext.Session.GetString("username");
-        //    return View();
-        //}
+      
         public IActionResult Registered()
         {
             ViewBag.Username = HttpContext.Session.GetString("username");

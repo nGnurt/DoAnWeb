@@ -25,35 +25,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         // GET: Admin/User
         public async Task<IActionResult> Index()/*(string searchString)*/
         {
-            //IQueryable<string> genreQuery = from m in _context.UserModel
-
-            //                                select m.UserName;
-
-            //var User = from m in _context.UserModel
-            //             select m;
-
-            //if (!string.IsNullOrEmpty(searchString))
-            //{
-            //    User = User.Where(s => s.UserName.Contains(searchString));
-            //}
-
-
-            //var movieGenreVM = new UserViewModel
-            //{
-            //    DSUser = new SelectList(await genreQuery.Distinct().ToListAsync()),
-            //    Users = await User.ToListAsync()
-            //};
-
-            //return View(movieGenreVM);
-            //if(!string.IsNullOrEmpty(searchString))
-            //{
-            //    return View(await _context.UserModel.Where(m => m.UserName.Contains(searchString)).ToListAsync());
-
-            //}
-            //else
-            //{
-            //    return View(await _context.UserModel.ToListAsync());
-            //}
+           
             return View();
         }
 
@@ -93,7 +65,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                userModel.Password = CreateMd5(userModel.Password);
+                userModel.Password = CreateMd5(userModel.Password);                
                 _context.Add(userModel);
                 await _context.SaveChangesAsync();
                 var url = Url.RouteUrl("", new { Controller = "Pages", action = "Index", area = "" });

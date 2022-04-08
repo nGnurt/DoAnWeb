@@ -50,9 +50,6 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/DanhMuc/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID_DanhMuc,TenDanhMuc,TrangThai")] DanhMucModel danhMucModel)
@@ -83,8 +80,7 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
         }
 
         // POST: Admin/DanhMuc/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+   
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("ID_DanhMuc,TenDanhMuc,TrangThai")] DanhMucModel danhMucModel)

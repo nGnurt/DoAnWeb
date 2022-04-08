@@ -69,10 +69,6 @@ namespace DoAn_ASPNETCORE.Areas.Admin.Controllers
             ViewData["DanhMuc"] = new SelectList(_context.Set<DanhMucModel>(), "ID_DanhMuc", "ID_DanhMuc");
             return View();
         }
-
-        // POST: Admin/SanPham/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,TenSP,MaLoai,DanhMuc,Gia,GiaMoi,Image,Image_List,Size,SoLuong,NgayLap,TrangThai")] SanPhamModel sanPhamModel, IFormFile ful, IFormFile ful1)
